@@ -8,7 +8,7 @@
   "policy_sha256": "fea2242d008921eb8da50a4eb3912283d4ab8d7bee19ee8693119d27a7e2baa2",
   "week": "2026-W41",
   "manifest": "inbox/2026-W41/manifest_proof-b_redteam.yaml",
-  "status": "AWAITING_APPROVAL",
+  "status": "REJECTED",
   "retry_count": 0,
   "llm_calls": 13,
   "llm_cost_usd": 2.4785,
@@ -138,7 +138,7 @@
   ],
   "decision_notes": "1 mechanical fix(es) and 2 targeted revision(s); final text = drafts/v4.md",
   "remaining_caveats": "- Legal: Does UK data protection law apply to any of our operations, making the ICO agentic AI call for evidence [W06] relevant to us?",
-  "route": "preflight → collect → screen → grade → draft → fix checks v2 → audit r1 (7/11) → revise v3 → audit r2 (9/11) → revise v4 → audit r3 (11/11) → approval gate (paused)",
+  "route": "preflight → collect → screen → grade → draft → fix checks v2 → audit r1 (7/11) → revise v3 → audit r2 (9/11) → revise v4 → audit r3 (11/11) → approval gate (paused) → decision NO",
   "approval_request": "runs/RUN-2026-W41-008/approval_request.md",
   "approval_request_sha256": "170ddaa239200cda5209acb483780522d4c3459d97cc68681bcb684f86e13f74",
   "brief_file": "runs/RUN-2026-W41-008/brief_final.md",
@@ -148,5 +148,13 @@
   "publish_target": "https://github.com/H-JAI-Hikmat/weekly-ai-brief/blob/main/published/2026-W41.md",
   "errors": [
     "NO_APPROVAL_RECORDED: publish refused: no explicit decision has been recorded (silence is never approval)"
-  ]
+  ],
+  "approver": "Hikmat El Jabi",
+  "approval_decision": "NO",
+  "approval_statement": "NO — do not publish (Recommended)",
+  "approval_channel": "Claude chat (AskUserQuestion), 15 Oct 2026",
+  "approval_at": "2026-10-15T16:57:56+04:00",
+  "final_status": "REJECTED",
+  "ended_at": "2026-10-15T16:57:56+04:00",
+  "stop_confirmation": "Run ended in terminal state REJECTED at 2026-10-15T16:57:56+04:00. Nothing published by this run (published/2026-W41.md absent — verified)."
 }

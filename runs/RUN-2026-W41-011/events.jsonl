@@ -1,0 +1,2 @@
+{"ts": "2026-10-15T16:59:04+04:00", "run_id": "RUN-2026-W41-011", "stage": "trigger", "event": "run_started", "trigger": "manual", "manifest": "inbox/2026-W41/manifest.yaml", "msg": "workflow v1.3.0, policy v1.2"}
+{"ts": "2026-10-15T16:59:04+04:00", "run_id": "RUN-2026-W41-011", "stage": "stop", "event": "BLOCKED_BY_POLICY", "msg": "Run ended in terminal state BLOCKED_BY_POLICY at 2026-10-15T16:59:04+04:00. Nothing published by this run (published/2026-W41.md exists from an earlier run)."}

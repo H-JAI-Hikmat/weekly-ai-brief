@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-2026-W41-008",
+  "decision": "NO",
+  "approver": "Hikmat El Jabi",
+  "channel": "Claude chat (AskUserQuestion), 15 Oct 2026",
+  "statement": "NO — do not publish (Recommended)",
+  "decided_at": "2026-10-15T16:57:56+04:00",
+  "brief_sha256": "b6e518726d45d23ea1a75b0ae6a1198cc20bb5c9e19fdfd3de84789fe247a06d",
+  "approval_request_sha256": "170ddaa239200cda5209acb483780522d4c3459d97cc68681bcb684f86e13f74",
+  "policy_version": "1.2"
+}

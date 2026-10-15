@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-2026-W41-010",
+  "decision": "YES",
+  "approver": "Hikmat El Jabi",
+  "channel": "Claude chat (AskUserQuestion), 15 Oct 2026 — second ask; the first answer 'No preference' was refused and nothing was recorded",
+  "statement": "YES — publish this brief (Recommended)",
+  "decided_at": "2026-10-15T16:58:54+04:00",
+  "brief_sha256": "7a959e7a57800bba6804a57b05b97a69b46cb3c6999ebd38641798d9da86f5ec",
+  "approval_request_sha256": "03d92a0eb574a24d0d764c8fb68d65840152bc85fb444557a23ccb8c2abae5f4",
+  "policy_version": "1.2"
+}
