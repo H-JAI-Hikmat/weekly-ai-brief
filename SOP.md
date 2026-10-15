@@ -63,7 +63,7 @@ A missing source is marked `UNAVAILABLE` and disclosed, never substituted or rec
 - Each run's own record is `runs/run_log.csv` plus `runs/<id>/events.jsonl`.
 
 **Recover.**
-- Unavailable source: re-capture it, then start a new run. A new run has a new ID; old runs are never edited.
+- Unavailable source: re-capture it, then start a new run. A new run has a new ID; old runs are never rewritten.
 - Audit failure or escalation: fix the input or the policy, raise the version if you change the policy, then re-run.
 - Push failure (`PUBLISH_FAILED`): the approved text is kept in `runs/<id>/`, and the publish commit stays local. `resume` does not retry a run that has ended. The owner either checks repo access, pushes that commit (it contains only `published/<week>.md`) and verifies it with `git ls-remote origin main`, or removes it with `git reset --hard origin/main` and starts a new run. This is a known limitation; see `CHANGELOG.md`.
 - Expired or rejected run: start a new run.
