@@ -8,7 +8,7 @@
   "policy_sha256": "36d5b25f5a1deeaaabb9ab79217df2f02e34e4feb75f638365c974753afa83f0",
   "week": "2026-W41",
   "manifest": "inbox/2026-W41/manifest.yaml",
-  "status": "STARTED",
+  "status": "ESCALATED",
   "retry_count": 0,
   "llm_calls": 4,
   "llm_cost_usd": 0.8409,
@@ -33,5 +33,15 @@
   "truncations": [],
   "quarantined": [],
   "audit_rounds": 1,
-  "audit_verdict": "3/11 PASS (round 1)"
+  "audit_verdict": "3/11 PASS (round 1)",
+  "route": "preflight → screen → grade → draft → audit r1 (3/11) → INTERRUPTED (closed later)",
+  "fallback": "run closed as interrupted; no partial output used",
+  "final_status": "ESCALATED",
+  "ended_at": "2026-10-15T17:10:14+04:00",
+  "errors": [
+    "RUN_INTERRUPTED: Run interrupted: no lock and no event for 60 min (limit 60); last event 2026-10-15T16:10:09+04:00. It never reached a terminal state; its last event was at 2026-10-15T16:10:09+04:00. Closed by operator Hikmat El Jabi (wab close-interrupted). Nothing was published by this run. Start a new run if this week still needs a brief."
+  ],
+  "escalation_code": "RUN_INTERRUPTED",
+  "escalation_recipient": "Hikmat El Jabi — Workflow Owner",
+  "stop_confirmation": "Run ended in terminal state ESCALATED at 2026-10-15T17:10:14+04:00. Nothing published by this run (published/2026-W41.md exists from an earlier run)."
 }

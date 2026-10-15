@@ -1,10 +1,11 @@
-# Monitoring status — generated 2026-10-15T16:59:12+04:00
+# Monitoring status — generated 2026-10-15T17:10:28+04:00
 
-Policy WAB-POLICY v1.2 · 11 run(s) on record (1 in progress, not counted in alerts)
+Policy WAB-POLICY v1.2 · 11 run(s) on record (0 in progress, not counted in alerts)
 
 ## Alerts
 - ⚠ 2 failed/blocked runs in the last 4: ['RUN-2026-W41-009', 'RUN-2026-W41-011']
 - ⚠ failure code SOURCE_UNAVAILABLE_REQUIRED repeated 2 times in the last 8 runs
+- ⚠ failure code RUN_INTERRUPTED repeated 2 times in the last 8 runs
 - ⚠ 6 failed fetch attempts for digital-strategy.ec.europa.eu in the last 7 days — check the capture job and the network path
 - ⚠ 6 failed fetch attempts for ico.org.uk in the last 7 days — check the capture job and the network path
 
@@ -16,7 +17,7 @@ Policy WAB-POLICY v1.2 · 11 run(s) on record (1 in progress, not counted in ale
 | RUN-2026-W41-003 | 2026-W41 | REJECTED |  | 0 | 16 | 3.2965 | — |
 | RUN-2026-W41-004 | 2026-W41 | ESCALATED | SOURCE_UNAVAILABLE_REQUIRED | 4 | 0 | 0.0 | — |
 | RUN-2026-W41-005 | 2026-W41 | ESCALATED | AUDIT_FAIL_AFTER_MAX_REVISIONS | 0 | 16 | 3.2532 | — |
-| RUN-2026-W41-006 | 2026-W41 | IN PROGRESS |  | 0 | 4 | 0.8409 | — |
+| RUN-2026-W41-006 | 2026-W41 | ESCALATED | RUN_INTERRUPTED | 0 | 4 | 0.8409 | — |
 | RUN-2026-W41-007 | 2026-W41 | ESCALATED | SOURCE_UNAVAILABLE_REQUIRED | 4 | 0 | 0.0 | — |
 | RUN-2026-W41-008 | 2026-W41 | REJECTED |  | 0 | 13 | 2.4785 | — |
 | RUN-2026-W41-009 | 2026-W41 | ESCALATED | RUN_INTERRUPTED | 0 | 0 | 0.0 | — |

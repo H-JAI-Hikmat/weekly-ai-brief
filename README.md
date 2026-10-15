@@ -9,6 +9,17 @@ End-of-course project, *Agentic AI in Practice* (Hikmat El Jabi). It automates t
 - **Earlier stages (unchanged):** [`lineage/2026-W40/`](lineage/2026-W40/) — mid-course instruction, sources, frozen baseline and final brief
 - **What changed and why:** [`CHANGELOG.md`](CHANGELOG.md) — every version change was triggered by a run or a monitoring alert
 
+## Proof runs (workflow 1.3.0, policy 1.2, Week 41)
+
+| Proof | Run | Result |
+|---|---|---|
+| (a) Normal success | [`RUN-2026-W41-010`](runs/RUN-2026-W41-010/) | Audit 11/11 → paused at the gate → explicit YES → [`published/2026-W41.md`](published/2026-W41.md) |
+| (b) Paused / blocked | [`RUN-2026-W41-008`](runs/RUN-2026-W41-008/) | Red-team source quarantined → paused at the gate → resume without decision refused → NO → REJECTED |
+| (b) Stop rule | [`RUN-2026-W41-011`](runs/RUN-2026-W41-011/) | Second run for a published week → BLOCKED_BY_POLICY at preflight |
+| (c) Failure → retry → fallback → escalation | [`RUN-2026-W41-007`](runs/RUN-2026-W41-007/) | Required captures missing → 3 fetch attempts each → UNAVAILABLE, nothing substituted → escalated |
+
+Earlier runs (001–006) ran on older versions and are kept unedited; [`CHANGELOG.md`](CHANGELOG.md) explains what each one changed. RUN-006 and RUN-009 were interrupted (a container restart, and a cancelled launch) and were closed as `RUN_INTERRUPTED`. Every run's minimum log fields are in [`runs/run_log.csv`](runs/run_log.csv).
+
 ## How it works (one run)
 
 ```
