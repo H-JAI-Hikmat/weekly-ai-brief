@@ -1,0 +1,91 @@
+[
+  {
+    "id": "R01",
+    "verdict": "FAIL",
+    "evidence": "Uncited factual sentences: (1) Item 3: \"The Commission held a special meeting of its 60-expert Scientific Panel, which has been investigating recent loss-of-control incidents.\" has no ID (W01.1/W01.2 support it). (2) Item 1 Why: \"The authority's existence now has a High-grade source.\" is unlabelled and uncited. (3) Confidence lines carry no IDs: Item 1 \"no announcement date or powers given\", Item 2 \"primary regulator page\", Item 3 \"no outcomes reported; incident details thin\", Item 4 \"one press source; policy texts not in pack\". (4) Dates ahead rows cite \"Week 40 watchlist\", which is not a pack Source ID. (5) Bottom line: \"Finish the agent-pilot sandbox and logging check by 19 Oct 2026.\" has no source.",
+    "why_it_matters": "Readers act on a phone in under five minutes and cannot trace uncited Confidence lines or watchlist-only dates back to evidence in this pack.",
+    "required_fix": "Add [W01] to the Item 3 first sentence. Add [W10] to Item 1 Why sentence 1 or label it (Inference). Append IDs to each Confidence line ([W10], [W06], [W01][W02], [W08]). Label the Dates ahead and Bottom line watchlist items \"Carried forward from Week 40 brief (context card)\" instead of using a Source column value.",
+    "judge": "J1"
+  },
+  {
+    "id": "R02",
+    "verdict": "PASS",
+    "evidence": "Checked claims are supported by their cited extracts. \"announced the Federal Authority for Artificial Intelligence and Data to integrate national data, AI and digital government systems\" matches W10.3. \"opened...08 Oct 2026, closing 20 Nov 2026\" matches W06.1/W06.2. \"No recommendations, decisions or findings are reported\" matches W01.3. \"well equipped\" on 09 Oct 2026 matches W02.1. \"33 Dubai Government entities...more than 300 public-facing use cases\" and the DESC CEO frameworks match W08.2/W08.3. \"FTC investigation of OpenAI, Anthropic and other AI companies\" matches W12.1. \"W07 gives no developer count\" matches W07.4. \"W03 shows only that an undated proposal exists\" matches the W03 capture note.",
+    "why_it_matters": "Accurate support keeps the UAE authority and EU panel items from being overstated to the CIO.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R03",
+    "verdict": "FAIL",
+    "evidence": "No Low source supports a claim on its own, and Confidence levels respect the caps (Item 3 is Medium on W01 High + W02 Medium). However, one Excluded reason is not true to the pack: W09 row says \"Aggregator repeating W08; not independent.\" The W09 capture note says it \"cites Dubai Future Foundation as original source\", not W08. The pack does not show W09 repeating W08. The W04 row reason is accurate (W03 metadata, W07.4).",
+    "why_it_matters": "C2 requires a true exclusion reason so reviewers can trust why a Low source was set aside.",
+    "required_fix": "Change the W09 reason to: \"Low grade; aggregator citing Dubai Future Foundation; adds only own analysis (W09.2); W08 relied on instead.\"",
+    "judge": "J1"
+  },
+  {
+    "id": "R04",
+    "verdict": "PASS",
+    "evidence": "The only material disagreement is the standardisation proposal date: W04.1 (Low) says \"6 Oct 2026\" while W03 shows no date. The brief escalates it: \"W03 is undated and W04 (Low) says 06 Oct 2026. Legal to confirm date and scope from EUR-Lex.\" The UAE authority powers gap is also escalated. W01/W02/W04.2 agree on the 60-member panel and no findings. W04.3 \"ten developers\" is unconfirmed by W07.4 and is disclosed in Excluded.",
+    "why_it_matters": "The committee sees which open dates and facts need Legal rather than relying on a Low newsletter.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R05",
+    "verdict": "FAIL",
+    "evidence": "(1) Header says \"Sources used: 5 of 14\", but DC03 shows 6 IDs cited (W01, W02, W06, W08, W10, W12). (2) Sources table titles do not match the source: W05 \"...recommendations on AI in healthcare\" drops \"the regulation of\". W07 omits \": our work to create regulatory certainty\". W03 omits \", repealing Regulation (EU) No 1025/2012...\". W13 omits \": enforcement proceedings, access to file, confidentiality, and limitation periods for penalties\". All other dates, numbers and names (11 Oct, 08 Oct–20 Nov, 60, 33, 300, Henna Virkkunen) match.",
+    "why_it_matters": "A wrong source count and altered titles undermine the brief's audit trail for the governance committee.",
+    "required_fix": "Change the header to \"Sources used: 6 of 14 (1 excluded)\" and copy the W03, W05, W07 and W13 titles verbatim from the pack.",
+    "judge": "J1"
+  },
+  {
+    "id": "R06",
+    "verdict": "FAIL",
+    "evidence": "Item 1 is presented as an in-week lead: \"A WAM report of 11 Oct 2026 says the UAE announced the Federal Authority for Artificial Intelligence and Data\" [W10]. W10.3 gives no announcement date. The brief's own Confidence line says \"no announcement date... given.\" The Week 40 watchlist already lists the authority's new powers as an open question, so the announcement likely predates 05 Oct 2026. The item uses the report's publication date in place of an event date and has no \"Background:\" label. Items 2 (08 Oct, W06.1), 3 (09 Oct, W01/W02.1) and 4 (05 Oct, W08) are inside the week.",
+    "why_it_matters": "The top-ranked, High-relevance item tells leadership something changed in the UAE this week, but the pack does not show that, and the earlier watchlist suggests it did not.",
+    "required_fix": "ESCALATE: Legal or the workflow owner must find the authority's announcement date. Until then, remove Item 1 as a lead item and keep the authority under \"For human decision\". If it stays in the brief, put it inside another item after the label \"Background:\".",
+    "judge": "J2"
+  },
+  {
+    "id": "R07",
+    "verdict": "FAIL",
+    "evidence": "The Assumptions table rows for P4, P5 and P6 match the context card wording, and the (Inference) labels in items 2–4 are applied correctly. Two sentences fail. (1) Item 3: \"EU duties reach us only if we place AI on the EU market (Assumption P4).\" This is a legal scope claim stated as fact. P4 is only the premise that we do not place AI on the EU market. The P4 tag sits on an unlabelled legal inference. (2) Item 1: \"The authority's existence now has a High-grade source.\" This is unlabelled and uncited. W10.3 reports only that the UAE \"announced the establishment\" of the authority.",
+    "why_it_matters": "Leaders could treat a legal scope conclusion and an announced authority as settled facts, and close off the EU and UAE questions too early.",
+    "required_fix": "Item 3: change to \"Whether EU duties reach us depends on our EU market exposure (Assumption P4); check with Legal (Inference).\" Item 1: change to \"A High-grade WAM report says the authority was announced [W10]; its powers over private operators are unknown (Inference).\"",
+    "judge": "J3"
+  },
+  {
+    "id": "R08",
+    "verdict": "PASS",
+    "evidence": "Each Why ties to the profile and each Action follows from it. Item 2: \"ready checklist for our agent pilots\" (P3) leads to \"review pilots against the survey sections\" [W06.3]. Item 3: \"agent pilots resemble the systems discussed\" (P3) plus Assumption P4 leads to the sandbox/logging check due 19 Oct 2026 (Week 40 watchlist). Item 1: \"powers over private operators are unknown\" leads to \"find primary texts\". Item 4: \"a programme, not a new rule\" leads to \"No action — monitor\". The Bottom line matches Items 1 and 3 and the 19 Oct action. The only P2-relevant development, the FTC probe [W12.1], is dated 01 Oct, before the week, and is routed to Head of IT Infrastructure under \"For human decision\". W13 (12 Oct) and W07 (13 Oct) fall after the week and the brief gives that reason.",
+    "why_it_matters": "Readers get actions with owners and dates that match their agent-pilot and UAE exposure, and no in-week development affecting P1–P6 is missing.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R09",
+    "verdict": "FAIL",
+    "evidence": "DC02: \"WHOLE 825/800\". The whole brief is 25 words over the limit. BODY is 450/450 (at the limit). Items are 4/5, and no headline is over 12 words (Item 1 has 7 words). DC01 confirms section order. The header says \"Sources used: 5 of 14\", but DC03 finds six cited IDs (W01, W02, W06, W08, W10, W12), so the required n field is wrong. | Deterministic DC02: BODY 450/450, WHOLE 825/800, items 4/5, headlines over 12 words: none",
+    "why_it_matters": "The brief goes over the one-page limit that phone readers rely on to decide in under five minutes, and the header misstates how many sources it uses.",
+    "required_fix": "Cut at least 25 words outside the Sources table. For example, merge the W05 and W11/W12 rows in \"Excluded or unverified\" into short reasons, and shorten the W04 reason. Keep BODY at or below 450 words. Change the header to \"Sources used: 6 of 14 (1 excluded)\".",
+    "judge": "J2",
+    "deterministic_fail": "DC02"
+  },
+  {
+    "id": "R10",
+    "verdict": "FAIL",
+    "evidence": "W99 is disclosed with the workflow's reason (DC05 PASS). No PII was found (DC06). Henna Virkkunen is named as in W01 and W02. One instance fails. Item 3 says \"EU duties reach us only if we place AI on the EU market.\" This is a legal interpretation of the scope of EU law. No pack extract (W01, W02) states it, and it is not marked \"check with Legal\". That makes it out-of-pack content and a legal conclusion given to non-lawyers. The Dates ahead rows and the data-residency question come from the Week 40 watchlist in the context card, which is a permitted input.",
+    "why_it_matters": "If the CIO acts on an unsourced \"only if\" statement about EU law, the organisation could dismiss EU obligations without Legal review.",
+    "required_fix": "Replace the sentence with \"Whether EU duties reach us depends on P4 — check with Legal (Assumption P4).\"",
+    "judge": "J3"
+  },
+  {
+    "id": "R11",
+    "verdict": "FAIL",
+    "evidence": "Wording is otherwise neutral. Officials and bodies are described by role and action (e.g. \"The Dubai Electronic Security Centre CEO cited…\" [W08]), and DC07 found no banned terms. One instance fails. Item 3 says Virkkunen \"said … that Europe is \\\"well equipped\\\" for rogue AI agents [W02].\" The word \"rogue\" is emotive. It sits outside the quotation marks, so it reads as the brief's own wording or as her words. W02.1 uses \"rogue\" in Cryptopolitan's paraphrase, not inside her verbatim quote. The term is therefore not reliably attributed to her.",
+    "why_it_matters": "Unattributed loaded wording could make the EU item seem more alarming than the primary source W01 supports and misrepresent a named official.",
+    "required_fix": "Change to: Henna Virkkunen said on 09 Oct 2026 that Europe is \"well equipped\" to deal with autonomous AI agents [W02]. Alternatively, write: …for what Cryptopolitan calls rogue AI agents [W02].",
+    "judge": "J3"
+  }
+]

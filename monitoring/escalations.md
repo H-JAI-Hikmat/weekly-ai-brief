@@ -1,0 +1,1 @@
+- 2026-10-15T15:34:19+04:00 · RUN-2026-W41-001 · AUDIT_ESCALATE · to Hikmat El Jabi — Workflow Owner · R06: ESCALATE: Legal or the workflow owner must find the authority's announcement date. Until then, remove Item 1 as a lead item and keep the authority under "For human decision". If it stays in the brief, put it inside another item after the label "Background:".

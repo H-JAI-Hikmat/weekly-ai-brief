@@ -3,8 +3,11 @@
 # Changing any value requires a new version number; the version is written into every run log.
 
 policy_id: WAB-POLICY
-version: "1.0"
+version: "1.1"
 effective: "2026-10-15"
+change_log:
+  - "1.0 (15 Oct 2026): first release; used for shakedown run RUN-2026-W41-001."
+  - "1.1 (15 Oct 2026): AUDIT_ESCALATE no longer stops a run on the first round. A judge's ESCALATE item is first handled by a targeted revision that removes the unsupported point or moves it to 'For human decision' (never by finding or inventing evidence) and is shown to the approver at the gate; the run stops only if the criterion still fails after the revision limit. Revision limit 2 → 3, model-call budget 14 → 20, runs per week 5 → 6 (one shakedown run used)."
 owner: "Hikmat El Jabi — Workflow Owner"
 enabled: true            # enforced: false = kill switch (engine refuses to start or resume)
 
@@ -64,9 +67,10 @@ escalation:                 # enforced: engine writes runs/<id>/escalation.md an
       route: owner
       action: STOP_BEFORE_APPROVAL
     - code: AUDIT_ESCALATE
-      when: "A judge marks a required fix 'ESCALATE:' (evidence gap or human-only decision)"
+      when: "A judge marks a required fix 'ESCALATE:' (evidence gap or human-only decision) and the criterion still fails after the revision limit"
       route: owner
       action: STOP_BEFORE_APPROVAL
+      note: "Before the limit, the drafter may only remove the unsupported point or move it to 'For human decision'; the open question is listed in the approval request for the approver."
     - code: INJECTION_QUARANTINED
       when: "A source contains instructions aimed at the AI or the workflow"
       route: security_contact
@@ -88,7 +92,7 @@ retry:                      # enforced: all loops are counted and bounded
   fetch:   {max_attempts: 3, backoff_seconds: [2, 4], timeout_seconds: 10}
   llm:     {max_attempts: 3, backoff_seconds: [10, 30], timeout_seconds: 900}
   publish: {max_attempts: 3, backoff_seconds: [5, 15]}
-  audit_revisions: 2        # at most two targeted revisions, then escalate
+  audit_revisions: 3        # at most three targeted revisions, then escalate
 
 fallback:
   missing_source: "Mark UNAVAILABLE and disclose it. Never substitute another source or reconstruct content."
@@ -96,9 +100,9 @@ fallback:
   publish_failure: "Keep the approved text in runs/<id>/, mark PUBLISH_FAILED, escalate."
 
 budgets:                    # enforced
-  max_llm_calls_per_run: 14
+  max_llm_calls_per_run: 20
   max_wall_minutes: 60
-  max_runs_started_per_week: 5
+  max_runs_started_per_week: 6
 
 stop_rules:                 # enforced
   kill_switch_file: "STOP"          # create this file at the repo root to stop all runs immediately

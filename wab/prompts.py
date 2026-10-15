@@ -66,7 +66,10 @@ def revise_prompt(ctx, sources, brief, failures):
     return (f"=== INSTRUCTION ===\n{_read('policy/instruction_v1.1.md')}\n\n{common_inputs(ctx, sources)}\n"
             f"=== CURRENT BRIEF ===\n{brief}\n\n=== AUDIT FAILURES TO FIX ===\n{fails}\n\n"
             "This is a TARGETED revision. Fix only the failures listed. Do not rewrite, restyle or add anything else; every "
-            "criterion that passed must still pass (citations, labels, word limits). Output only the full revised brief.")
+            "criterion that passed must still pass (citations, labels, word limits). Where a required fix begins with "
+            "'ESCALATE:', do not try to supply the missing evidence: remove the unsupported point from the lead items (or keep it only "
+            "after the label 'Background:' if the pack supports it) and add the open question to 'For human decision'. "
+            "Output only the full revised brief.")
 
 
 def judge_system(name):

@@ -115,9 +115,14 @@ def start(manifest_path, trigger="manual", operator=None):
             if not fails:
                 break
             esc = [f for f in fails if str(f.get("required_fix", "")).strip().upper().startswith("ESCALATE")]
-            if esc:
-                raise PolicyStop("ESCALATED", "AUDIT_ESCALATE", "; ".join(f"{f['id']}: {f['required_fix']}" for f in esc)[:600], "owner")
+            if esc:  # policy v1.1: carried to the approver, never resolved by finding or inventing evidence
+                seen = run.state.get("judge_escalations") or []
+                seen += [{"round": round_no, "criterion": f["id"], "judge": f["judge"], "fix": f["required_fix"][:500]} for f in esc]
+                run.save(judge_escalations=seen)
+                run.log("audit", "judge_escalation", round=round_no, msg="; ".join(f"{f['id']}: {f['required_fix'][:160]}" for f in esc))
             if round_no > max_rev:
+                if esc:
+                    raise PolicyStop("ESCALATED", "AUDIT_ESCALATE", "; ".join(f"{f['id']}: {f['required_fix']}" for f in esc)[:600], "owner")
                 raise PolicyStop("ESCALATED", "AUDIT_FAIL_AFTER_MAX_REVISIONS",
                                  f"still failing after {max_rev} revisions: {[f['id'] for f in fails]}", "owner")
             failures = [{"id": f["id"], "source": f.get("deterministic_fail") or f["judge"], "detail": f.get("evidence", ""),

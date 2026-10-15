@@ -38,6 +38,12 @@ def request_approval(run, policy, cfg, sources, verdicts, checks, brief_rel):
               "## Sources",
               f"- Used: {len(used)} — " + ", ".join(f"{s['id']} ({s['grade']})" for s in used),
               f"- Excluded by the workflow: {len(exc)} — " + (", ".join(f"{s['id']} {s['status']}" for s in exc) or "none")]
+    je = run.state.get("judge_escalations") or []
+    lines += ["", "## Questions the audit judges escalated to you",
+              *(f"- Round {e['round']} · {e['criterion']} ({e['judge']}): {e['fix']}" for e in je),
+              *(["- None"] if not je else ["", "Each was handled by a targeted revision that removed the unsupported point or moved it to "
+                                           "'For human decision' (no evidence was added). The final audit passed. Check the brief's "
+                                           "'For human decision' section before deciding."])]
     q = run.state.get("quarantined") or []
     lines += ["", "## Security and privacy flags",
               f"- Quarantined for instructions aimed at the AI or the workflow: {', '.join(x['id'] for x in q) or 'none'}"
