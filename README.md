@@ -7,18 +7,20 @@ End-of-course project, *Agentic AI in Practice* (Hikmat El Jabi). It automates t
 - **Run evidence:** [`runs/`](runs/) — one folder per run (events log, inputs, drafts, audit verdicts, approval request and decision, escalation) and [`runs/run_log.csv`](runs/run_log.csv)
 - **Monitoring:** [`monitoring/status.md`](monitoring/status.md) and [`monitoring/escalations.md`](monitoring/escalations.md)
 - **Earlier stages (unchanged):** [`lineage/2026-W40/`](lineage/2026-W40/) — mid-course instruction, sources, frozen baseline and final brief
+- **What changed and why:** [`CHANGELOG.md`](CHANGELOG.md) — every version change was triggered by a run or a monitoring alert
 
 ## How it works (one run)
 
 ```
-trigger ─► preflight ─► collect ─► screen ─► grade ─► draft ─► audit ─┬─► PASS ─► APPROVAL GATE (pause) ─► YES ─► publish ─► stop
- (Mon 07:00   (kill switch,  (captures;   (PII redact,  (registry  (Claude,  (9 checks +   │                 │ NO / silence ─► stop, nothing published
-  or manual)   one per week)  bounded      injection     rules)     no tools) 3 AI judges)  └─► FAIL ─► targeted revision (max 3) ─► still FAIL / ESCALATE ─► escalate, stop
-                              fetch, no    quarantine)
-                              substitutes) ── required source missing ─► escalate, stop before drafting
+trigger ─► preflight ─► collect ─► screen ─► grade ─► draft ─► checks ─► audit ─┬─► PASS ─► APPROVAL GATE (pause) ─► YES ─► publish ─► stop
+ (Mon 07:00   (kill switch,  (captures;   (PII redact,  (registry  (Claude,  (9 rules;  (3 AI    │                 │ NO / silence ─► stop, nothing published
+  or manual)   one per week,  bounded      injection     rules)     no tools; ≤2 fixes)  judges) └─► FAIL ─► targeted revision (max 3) ─► still FAIL ─► escalate, stop
+               close crashed  fetch, no    quarantine)              workflow
+               runs)          substitutes) ── required source missing ─► escalate, stop before drafting
+                                                                    builds Sources)
 ```
 
-Every loop has a counter (fetch 3 attempts, model call 3 attempts, revisions 3, push 3 attempts, 20 model calls and 60 minutes per run). Every run ends in a named terminal state with a stop confirmation in its log.
+Every loop has a counter (fetch 3 attempts, model call 3 attempts, mechanical fixes 2, revisions 3, push 3 attempts, 20 model calls and 60 minutes per run). Every run ends in a named terminal state with a stop confirmation in its log. A run whose process dies (a crash or a machine restart) is detected through its lock and closed as `RUN_INTERRUPTED` at the next preflight; an unexpected error ends the run as `INTERNAL_ERROR`.
 
 ## Setup (operator machine)
 
@@ -27,7 +29,7 @@ Requirements: Python 3.10+, `git`, and [Claude Code](https://docs.claude.com) si
 ```bash
 git clone https://github.com/H-JAI-Hikmat/weekly-ai-brief && cd weekly-ai-brief
 pip install pyyaml requests
-python -m unittest -v tests.test_controls        # offline tests of the gates — no model calls, no pushes
+python -m unittest -v tests.test_controls        # 17 offline tests of the gates — no model calls, no pushes
 ```
 
 The model is called as `claude -p --tools "" --strict-mcp-config --system-prompt … --model <sonnet|opus> --no-session-persistence`, from an empty folder, so the model has **no tools at all**: text in a source cannot make it act. A self-hosted OpenAI-compatible endpoint (e.g. vLLM) can replace it by changing `wab/llm.py`; the gates do not depend on the provider.
@@ -42,13 +44,14 @@ python -m wab approve <RUN_ID> --decision YES --approver "Hikmat El Jabi" --chan
 python -m wab resume <RUN_ID>          # publishes only if a valid YES is on record for the exact text (SHA-256)
 python -m wab monitor                  # rebuilds monitoring/status.md, prints alerts
 python -m wab stop --reason "…"        # kill switch: creates STOP; delete the file to re-enable
+python -m wab close-interrupted        # close runs whose process ended without a terminal state (also done at every preflight)
 ```
 
 Cron example: `0 7 * * 1 cd /path/to/weekly-ai-brief && TZ=Asia/Dubai python -m wab run --manifest inbox/$(date +%G-W%V)/manifest.yaml --trigger schedule`
 
 ## Inputs
 
-`inbox/<week>/manifest.yaml` lists each source (ID, URL, publisher, date, required flag) and its capture file with a SHA-256. Captures are made by the capture step (Claude web search and page capture in the proof environment). If a capture is missing, the workflow tries a GET-only fetch from an allowlisted domain ([`config/source_registry.yaml`](config/source_registry.yaml)). It never fills a gap with other content.
+`inbox/<week>/manifest.yaml` lists each source (ID, URL, publisher, date, required flag) and its capture file with a SHA-256. Captures are made by the capture step (Claude web search and page capture in the proof environment). The brief's Sources table and source count are built by the workflow from the manifest, not written by the model. If a capture is missing, the workflow tries a GET-only fetch from an allowlisted domain ([`config/source_registry.yaml`](config/source_registry.yaml)). It never fills a gap with other content.
 
 ## Secrets and personal data
 
