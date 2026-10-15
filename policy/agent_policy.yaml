@@ -3,17 +3,18 @@
 # Changing any value requires a new version number; the version is written into every run log.
 
 policy_id: WAB-POLICY
-version: "1.1"
+version: "1.2"
 effective: "2026-10-15"
 change_log:
   - "1.0 (15 Oct 2026): first release; used for shakedown run RUN-2026-W41-001."
   - "1.1 (15 Oct 2026): AUDIT_ESCALATE no longer stops a run on the first round. A judge's ESCALATE item is first handled by a targeted revision that removes the unsupported point or moves it to 'For human decision' (never by finding or inventing evidence) and is shown to the approver at the gate; the run stops only if the criterion still fails after the revision limit. Revision limit 2 → 3, model-call budget 14 → 20, runs per week 5 → 6 (one shakedown run used)."
+  - "1.2 (15 Oct 2026): Evidence-driven change after the v1.1 proof attempt (monitoring alert: AUDIT_FAIL_AFTER_MAX_REVISIONS twice; RUN-2026-W41-006 left non-terminal by a container restart). (a) Interrupted runs: every run holds a lock; a run whose process is gone, or whose last event is older than the wall-time budget, is closed as ESCALATED with RUN_INTERRUPTED and reported to the Owner; any unexpected error ends the run as ESCALATED with INTERNAL_ERROR. (b) Deterministic checks run before the AI judges; failures are sent back for up to 2 mechanical fixes per run. (c) The weekly run cap is counted per policy version: v1.1's six runs were used by two shakedown runs, three proof-set runs and one interrupted run, and a policy change is itself an Owner decision recorded here. The cap's purpose (no runaway re-runs under one configuration) is unchanged."
 owner: "Hikmat El Jabi — Workflow Owner"
 enabled: true            # enforced: false = kill switch (engine refuses to start or resume)
 
 goal: >
   Every week, turn the captured source pack for the previous Monday–Sunday into a one-page,
-  source-grounded AI-governance brief for the IT Leadership Team, audit it against rubric v1.1,
+  source-grounded AI-governance brief for the IT Leadership Team, audit it against the rubric,
   and publish it only after the Workflow Owner explicitly approves the exact text.
 
 audience: "IT Leadership Team — CIO; Heads of IT Infrastructure, Data & Analytics, Information Security, IT Risk"
@@ -87,12 +88,21 @@ escalation:                 # enforced: engine writes runs/<id>/escalation.md an
       when: "Run exceeds its model-call or wall-time budget"
       route: owner
       action: STOP
+    - code: RUN_INTERRUPTED
+      when: "A run's process ended without a terminal state (crash, restart); detected at the next run's preflight or by `wab close-interrupted`"
+      route: owner
+      action: CLOSE_RUN_NOTHING_PUBLISHED
+    - code: INTERNAL_ERROR
+      when: "Unexpected error in the workflow code"
+      route: owner
+      action: STOP
 
 retry:                      # enforced: all loops are counted and bounded
   fetch:   {max_attempts: 3, backoff_seconds: [2, 4], timeout_seconds: 10}
   llm:     {max_attempts: 3, backoff_seconds: [10, 30], timeout_seconds: 900}
   publish: {max_attempts: 3, backoff_seconds: [5, 15]}
   audit_revisions: 3        # at most three targeted revisions, then escalate
+  mechanical_fixes: 2       # v1.2: deterministic-check failures sent back to the drafter before the judges run, per run
 
 fallback:
   missing_source: "Mark UNAVAILABLE and disclose it. Never substitute another source or reconstruct content."
@@ -102,14 +112,15 @@ fallback:
 budgets:                    # enforced
   max_llm_calls_per_run: 20
   max_wall_minutes: 60
-  max_runs_started_per_week: 6
+  max_runs_started_per_week: 6       # counted per policy version (v1.2)
+  interrupted_after_minutes: 60      # a non-terminal run with no live process, or silent this long, is closed as RUN_INTERRUPTED
 
 stop_rules:                 # enforced
   kill_switch_file: "STOP"          # create this file at the repo root to stop all runs immediately
   one_publication_per_week: true    # a reporting week that is already published cannot be published again
   terminal_states: [COMPLETED, REJECTED, EXPIRED, ESCALATED, BLOCKED_BY_POLICY, STOPPED, ABORTED, PUBLISH_FAILED]
 
-security:                   # enforced in wab/screen.py
+security:                   # enforced in wab/sources.py (screen)
   untrusted_source_text: true
   max_chars_per_source: 6000        # data minimisation: longer captures are truncated and flagged
   injection_patterns:
@@ -136,3 +147,4 @@ monitoring:                 # enforced in wab/monitor.py
   alert_if_same_failure_code_in_last_n: {n: 8, threshold: 2}
   alert_if_fetch_failures_per_domain_7d: 3
   alert_if_awaiting_approval_hours: 48
+  alert_on_interrupted_run: true

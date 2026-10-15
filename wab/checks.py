@@ -84,7 +84,7 @@ def run_checks(md, sources, policy):
     add("DC08", "R08", not gaps, f"{gaps or 'all items complete'}")
 
     # DC09 date format DD Mon YYYY (no 'October 9, 2026' or ISO dates)
-    bad_dates = sorted(set(BAD_DATE.findall(md)))
+    bad_dates = sorted(set(BAD_DATE.findall(md.split("\n## Sources")[0])))  # v1.3.0: Sources table (links) is workflow-built
     add("DC09", "R05", not bad_dates, f"non-standard dates: {bad_dates or 'none'}")
 
     return res, {"body_words": body, "whole_words": whole, "items": len(heads)}

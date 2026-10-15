@@ -36,7 +36,9 @@ def request_approval(run, policy, cfg, sources, verdicts, checks, brief_rel):
     lines += [f"| {c} | {verdicts[c]['verdict']} | {verdicts[c]['judge']} |" for c in sorted(verdicts)]
     lines += ["", "Deterministic checks: " + ", ".join(f"{c['id']} {c['result']}" for c in checks), "",
               "## Sources",
-              f"- Used: {len(used)} — " + ", ".join(f"{s['id']} ({s['grade']})" for s in used),
+              f"- In the pack: {len(sources)} · available to the writer: {len(used)} — " + ", ".join(f"{s['id']} ({s['grade']})" for s in used),
+              f"- Cited in the brief: {len(run.state.get('sources_cited') or [])} — {', '.join(run.state.get('sources_cited') or []) or 'none'} "
+              "(the brief's Sources table and count are built by the workflow from the manifest)",
               f"- Excluded by the workflow: {len(exc)} — " + (", ".join(f"{s['id']} {s['status']}" for s in exc) or "none")]
     je = run.state.get("judge_escalations") or []
     lines += ["", "## Questions the audit judges escalated to you",
@@ -44,6 +46,9 @@ def request_approval(run, policy, cfg, sources, verdicts, checks, brief_rel):
               *(["- None"] if not je else ["", "Each was handled by a targeted revision that removed the unsupported point or moved it to "
                                            "'For human decision' (no evidence was added). The final audit passed. Check the brief's "
                                            "'For human decision' section before deciding."])]
+    notes = run.state.get("judge_notes") or []
+    lines += ["", "## Reviewer notes (non-blocking wording suggestions from the final audit round)",
+              *(f"- {n['criterion']} ({n['judge']}): {n['note'][:400]}" for n in notes), *(["- None"] if not notes else [])]
     q = run.state.get("quarantined") or []
     lines += ["", "## Security and privacy flags",
               f"- Quarantined for instructions aimed at the AI or the workflow: {', '.join(x['id'] for x in q) or 'none'}"

@@ -4,6 +4,7 @@ import datetime as dt
 import hashlib
 import json
 import os
+import socket
 from pathlib import Path
 
 import yaml
@@ -91,6 +92,63 @@ class Run:
         return str((self.dir / name).relative_to(ROOT))
 
 
+TERMINAL = {"COMPLETED", "REJECTED", "EXPIRED", "ESCALATED", "BLOCKED_BY_POLICY", "STOPPED", "ABORTED", "PUBLISH_FAILED"}
+PAUSED = {"AWAITING_APPROVAL", "APPROVED"}
+
+
+def boot_id():
+    try:
+        return Path("/proc/sys/kernel/random/boot_id").read_text().strip()
+    except OSError:
+        return "unknown"
+
+
+def pid_alive(pid):
+    try:
+        os.kill(int(pid), 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except (PermissionError, ValueError, TypeError):
+        return True
+
+
+def acquire_lock(run):
+    """v1.3.0: a run holds a lock while its process works on it, so a crash can be told apart from a live run."""
+    run.write(".lock", json.dumps({"pid": os.getpid(), "boot_id": boot_id(), "host": socket.gethostname(), "since": iso()}))
+
+
+def release_lock(run):
+    (run.dir / ".lock").unlink(missing_ok=True)
+
+
+def last_event_at(run):
+    if not run.events.exists():
+        return None
+    lines = [l for l in run.events.read_text(encoding="utf-8").splitlines() if l.strip()]
+    return dt.datetime.fromisoformat(json.loads(lines[-1])["ts"]) if lines else None
+
+
+def interrupted_reason(run, policy):
+    """Return why a working (non-terminal, non-paused) run is no longer being worked on, or None if it may be live."""
+    st = run.state.get("final_status") or run.state.get("status")
+    if not st or st in TERMINAL or st in PAUSED:
+        return None
+    lock = run.dir / ".lock"
+    if lock.exists():
+        info = json.loads(lock.read_text())
+        if info.get("boot_id") != boot_id():
+            return f"the machine restarted since the run's process (pid {info.get('pid')}) took its lock at {info.get('since')}"
+        if not pid_alive(info.get("pid")):
+            return f"the run's process (pid {info.get('pid')}) is no longer running"
+        return None
+    last = last_event_at(run)
+    limit = policy["budgets"].get("interrupted_after_minutes", policy["budgets"]["max_wall_minutes"])
+    if last and (now() - last).total_seconds() / 60 > limit:
+        return f"no lock and no event for {int((now() - last).total_seconds() / 60)} min (limit {limit}); last event {iso(last)}"
+    return None
+
+
 def next_run_id(week):
     runs = ROOT / "runs"
     runs.mkdir(exist_ok=True)
@@ -112,6 +170,13 @@ RUN_LOG_FIELDS = [
     # Output
     "final_status", "output_location", "remaining_caveats", "stop_confirmation", "llm_calls", "llm_cost_usd",
 ]
+
+
+def append_escalation_log(line):
+    """One line per escalation or notice in monitoring/escalations.md (the Owner's and security contact's queue)."""
+    (ROOT / "monitoring").mkdir(exist_ok=True)
+    with (ROOT / "monitoring/escalations.md").open("a", encoding="utf-8") as f:
+        f.write(line.rstrip("\n") + "\n")
 
 
 def write_run_log_row(run):

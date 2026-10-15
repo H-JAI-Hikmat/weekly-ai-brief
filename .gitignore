@@ -3,3 +3,4 @@ __pycache__/
 runs/*/llm_sandbox/
 runs/TEST-*/
 runs/DRY-*/
+runs/*/.lock

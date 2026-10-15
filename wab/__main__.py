@@ -6,13 +6,14 @@
   status   [RUN_ID]
   monitor                             (rebuilds monitoring/status.md and prints alerts)
   stop     --reason TEXT              (creates the STOP kill-switch file; delete the file to re-enable)
+  close-interrupted [--operator NAME] (closes runs whose process ended without a terminal state; also done at every preflight)
 """
 import argparse
 import json
 import sys
 
 from . import engine, monitor
-from .core import ROOT, Run, iso, load_policy
+from .core import ROOT, Run, interrupted_reason, iso, load_config, load_policy
 
 
 def main(argv=None):
@@ -25,6 +26,7 @@ def main(argv=None):
     st = sub.add_parser("status"); st.add_argument("run_id", nargs="?")
     sub.add_parser("monitor")
     k = sub.add_parser("stop"); k.add_argument("--reason", required=True)
+    ci = sub.add_parser("close-interrupted"); ci.add_argument("--operator")
     args = ap.parse_args(argv)
 
     if args.cmd == "run":
@@ -39,8 +41,10 @@ def main(argv=None):
     elif args.cmd == "status":
         ids = [args.run_id] if args.run_id else sorted(p.name for p in (ROOT / "runs").glob("RUN-*"))
         for i in ids:
-            s = Run(i).state
-            print(f"{i}: {s.get('final_status') or s.get('status')} · {s.get('route', '')}")
+            run = Run(i)
+            s = run.state
+            why = interrupted_reason(run, load_policy())
+            print(f"{i}: {s.get('final_status') or s.get('status')}{' (INTERRUPTED: ' + why + ')' if why else ''} · {s.get('route', '')}")
     elif args.cmd == "monitor":
         alerts = monitor.build()
         print("\n".join(alerts) or "No alerts.")
@@ -48,6 +52,9 @@ def main(argv=None):
         pol = load_policy()
         (ROOT / pol["stop_rules"]["kill_switch_file"]).write_text(f"Stopped at {iso()}: {args.reason}\n")
         print(f"Kill switch set: {pol['stop_rules']['kill_switch_file']} created. No run will start or resume until it is deleted.")
+    elif args.cmd == "close-interrupted":
+        closed = engine.close_interrupted(load_policy(), closed_by=f"operator {args.operator or load_config()['operator_default']} (wab close-interrupted)")
+        print(f"Closed as RUN_INTERRUPTED: {closed}" if closed else "No interrupted runs.")
     return 0
 
 

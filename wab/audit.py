@@ -1,4 +1,4 @@
-"""Audit gate: deterministic checks + three independent AI judges (rubric v1.1, 11 criteria)."""
+"""Audit gate: deterministic checks + three independent AI judges (rubric from config, 11 criteria)."""
 import json
 
 from . import llm, prompts
@@ -7,7 +7,7 @@ from .checks import run_checks
 CRITERIA = [f"R{i:02d}" for i in range(1, 12)]
 
 
-def audit(run, policy, cfg, ctx, sources, brief, round_no):
+def audit(run, policy, cfg, ctx, sources, brief, round_no, history=None):
     checks, counts = run_checks(brief, sources, policy)
     checks_text = "\n".join(f"{c['id']} [{c['criterion']}] {c['result']}: {c['detail']}" for c in checks)
     run.write(f"audit/round{round_no}_deterministic.json", json.dumps({"checks": checks, "counts": counts}, indent=2))
@@ -16,7 +16,7 @@ def audit(run, policy, cfg, ctx, sources, brief, round_no):
 
     verdicts = {}
     for jid, (name, crits, _) in prompts.JUDGES.items():
-        prompt = prompts.judge_prompt(jid, ctx, sources, brief, checks_text)
+        prompt = prompts.judge_prompt(jid, ctx, sources, brief, checks_text, history)
         parsed = None
         for attempt in (1, 2):  # one repair attempt for malformed JSON, then the judge counts as failed
             text = llm.call(run, policy, purpose=f"audit_r{round_no}_{jid}", system=prompts.judge_system(name),

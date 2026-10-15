@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 
 import requests
 
-from .core import ROOT, PolicyStop, load_yaml, sha256_text
+from .core import ROOT, PolicyStop, append_escalation_log, iso, load_yaml, sha256_text
 
 
 def _domain(url):
@@ -113,8 +113,18 @@ def screen(run, policy, sources):
     run.save(redactions=redactions, truncations=truncations, quarantined=quarantined)
     run.log("screen", "done", msg=f"{len(quarantined)} quarantined, {len(redactions)} redaction(s), {len(truncations)} truncation(s)")
     if quarantined:
-        run.log("screen", "escalation_notice", code="INJECTION_QUARANTINED", route="security_contact",
-                msg="run continues without the quarantined source(s); they are disclosed in the brief and the approval request")
+        who = policy["escalation"]["security_contact"]
+        ids = ", ".join(q["id"] for q in quarantined)
+        # v1.3.0: the notice is a written record for the security contact, not only a log line
+        run.write("security_notice.md", f"# Security notice — {run.id}\n\nTo: {who}\nCode: INJECTION_QUARANTINED\nRaised: {iso()}\n\n"
+                  f"## What happened\nThe screen found text aimed at the AI or the workflow in: {ids}.\n\n"
+                  + "\n".join(f"- {q['id']}: {q['matches']}" for q in quarantined)
+                  + "\n\n## What the workflow did\n- The quarantined text was never sent to the model.\n- The run continues without it; the brief and "
+                  "the approval request disclose it.\n- PII in the source was redacted before storage.\n\n## Decision needed\nReview the source "
+                  "and decide whether its publisher stays on the allowlist.\n")
+        append_escalation_log(f"- {iso()} · {run.id} · INJECTION_QUARANTINED · to {who} · {ids} quarantined; run continued without it (runs/{run.id}/security_notice.md)")
+        run.log("screen", "escalation_notice", code="INJECTION_QUARANTINED", route="security_contact", recipient=who,
+                msg=f"notice to {who} (runs/{run.id}/security_notice.md); run continues without {ids}; disclosed in the brief and the approval request")
     return sources
 
 
