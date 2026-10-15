@@ -13,12 +13,12 @@ End-of-course project, *Agentic AI in Practice* (Hikmat El Jabi). It automates t
 ```
 trigger ─► preflight ─► collect ─► screen ─► grade ─► draft ─► audit ─┬─► PASS ─► APPROVAL GATE (pause) ─► YES ─► publish ─► stop
  (Mon 07:00   (kill switch,  (captures;   (PII redact,  (registry  (Claude,  (9 checks +   │                 │ NO / silence ─► stop, nothing published
-  or manual)   one per week)  bounded      injection     rules)     no tools) 3 AI judges)  └─► FAIL ─► targeted revision (max 2) ─► still FAIL / ESCALATE ─► escalate, stop
+  or manual)   one per week)  bounded      injection     rules)     no tools) 3 AI judges)  └─► FAIL ─► targeted revision (max 3) ─► still FAIL / ESCALATE ─► escalate, stop
                               fetch, no    quarantine)
                               substitutes) ── required source missing ─► escalate, stop before drafting
 ```
 
-Every loop has a counter (fetch 3 attempts, model call 3 attempts, revisions 2, push 3 attempts, 14 model calls and 60 minutes per run). Every run ends in a named terminal state with a stop confirmation in its log.
+Every loop has a counter (fetch 3 attempts, model call 3 attempts, revisions 3, push 3 attempts, 20 model calls and 60 minutes per run). Every run ends in a named terminal state with a stop confirmation in its log.
 
 ## Setup (operator machine)
 

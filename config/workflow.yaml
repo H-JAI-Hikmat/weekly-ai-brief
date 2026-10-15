@@ -1,5 +1,5 @@
 # Workflow settings (not policy). Policy rules live in policy/agent_policy.yaml.
-workflow_version: "1.1.0"
+workflow_version: "1.2.0"
 operator_default: "Hikmat El Jabi"
 trigger:
   schedule: "Every Monday 07:00 Asia/Dubai (cron: 0 7 * * 1, TZ=Asia/Dubai) — runs `python -m wab run --manifest inbox/<week>/manifest.yaml --trigger schedule`"
@@ -13,8 +13,8 @@ publish:
   branch: "main"
   folder: "published"
 paths:
-  instruction: "policy/instruction_v1.1.md"
-  rubric: "policy/rubric_v1.1.md"
+  instruction: "policy/instruction_v1.2.md"
+  rubric: "policy/rubric_v1.2.md"
   context_card: "policy/context_card.md"
   registry: "config/source_registry.yaml"
   runs: "runs"

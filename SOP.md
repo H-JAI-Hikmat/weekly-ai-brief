@@ -1,6 +1,6 @@
 # SOP — Weekly AI Governance Brief workflow
 
-Policy WAB-POLICY v1.0 · Workflow v1.0.0 · Owner and sole approver: Hikmat El Jabi · Repo: github.com/H-JAI-Hikmat/weekly-ai-brief
+Policy WAB-POLICY v1.1 · Workflow v1.2.0 · Owner and sole approver: Hikmat El Jabi · Repo: github.com/H-JAI-Hikmat/weekly-ai-brief
 
 **Goal.** Every Monday, turn last week's captured public sources into a one-page, source-grounded AI-governance brief for the IT Leadership Team. Publish it only after the owner explicitly approves the exact text.
 
@@ -43,9 +43,9 @@ Policy WAB-POLICY v1.0 · Workflow v1.0.0 · Owner and sole approver: Hikmat El 
 |---|---|
 | Source fetch | 3 attempts (2 s, then 4 s backoff; 10 s timeout) |
 | Model call | 3 attempts (10 s, then 30 s backoff) |
-| Targeted revisions | 2, each followed by a full re-audit |
+| Targeted revisions | 3, each followed by a full re-audit |
 | Push | 3 attempts |
-| Per run | 14 model calls and 60 minutes |
+| Per run | 20 model calls and 60 minutes |
 
 A missing source is marked `UNAVAILABLE` and disclosed, never substituted or reconstructed. A failed model call is not silently replaced by another model.
 
@@ -68,4 +68,4 @@ A missing source is marked `UNAVAILABLE` and disclosed, never substituted or rec
 - Anyone on the IT Leadership Team may ask the operator to stop the workflow.
 - Stop: `python -m wab stop --reason "…"` creates `STOP`, and no run starts or resumes until the owner deletes it.
 - Alternatively set `enabled: false` in the policy.
-- Built-in stops: one publication per week, at most 5 runs per week, and every run ends in a terminal state with a logged stop confirmation.
+- Built-in stops: one publication per week, at most 6 runs per week, and every run ends in a terminal state with a logged stop confirmation.

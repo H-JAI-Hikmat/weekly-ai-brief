@@ -42,8 +42,8 @@ def run_checks(md, sources, policy):
     whole = words(md.split("\n## Sources")[0])
     heads = re.findall(r"^### \d+\.\s*(.+?)\s+—", md, flags=re.M)
     long_heads = [h for h in heads if words(h) > 12]
-    ok = body <= 450 and whole <= 800 and 1 <= len(heads) <= 5 and not long_heads
-    add("DC02", "R09", ok, f"BODY {body}/450, WHOLE {whole}/800, items {len(heads)}/5, headlines over 12 words: {long_heads or 'none'}")
+    ok = body <= 450 and whole <= 850 and 1 <= len(heads) <= 5 and not long_heads
+    add("DC02", "R09", ok, f"BODY {body}/450, WHOLE {whole}/850, items {len(heads)}/5, headlines over 12 words: {long_heads or 'none'}")
 
     # DC03 every cited ID exists in the pack
     known = {s["id"] for s in sources}

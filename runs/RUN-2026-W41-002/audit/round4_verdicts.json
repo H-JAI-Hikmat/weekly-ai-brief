@@ -1,0 +1,91 @@
+[
+  {
+    "id": "R01",
+    "verdict": "FAIL",
+    "evidence": "DC03 passed (all bracketed IDs exist), but three factual sentences under For human decision have no pack Source ID. (1) \"Background: the Week 40 brief flagged a public-sector data-residency rule resting on Low-grade sources\" has no ID; it comes from the context card, not the pack. (2) \"Week 40 watchlist dates lack a source this week: 28 Nov 2026 (US proposed \"Super Intelligence\" legal definition due); 02 Dec 2026 (EU Article 50(2)…); 02 Dec 2027…; 02 Aug 2028…\" has no ID. (3) \"W07 postdates the week\" has no [W07]. Every other factual sentence in the Bottom line, items, Confidence lines and tables carries a valid ID that exists in the pack.",
+    "why_it_matters": "Readers cannot tell which watchlist dates and data-residency claims rest on this week's evidence and which are carried forward unverified, so they may treat old, possibly Low-grade claims as confirmed.",
+    "required_fix": "Add [W07] to \"W07 postdates the week [W07]\". Rewrite (1) and (2) as questions, attributed to the Week 40 watchlist rather than stated as fact. For example: \"Legal: no source in this week's pack covers the carried-forward Week 40 watchlist dates (28 Nov 2026; 02 Dec 2026; 02 Dec 2027; 02 Aug 2028) or the data-residency rule — do they still stand?\"",
+    "judge": "J1"
+  },
+  {
+    "id": "R02",
+    "verdict": "PASS",
+    "evidence": "Item 1 is supported by W01.1–W01.3 and W02.2: \"held a special meeting of its Scientific Panel on artificial intelligence, reported 09 Oct 2026\", \"investigating 'recent loss-of-control incidents'\", and \"agents that breached OpenAI and Hugging Face systems\", correctly attributed to the press report. Item 2 matches W08.2–W08.3: \"33 Dubai Government entities will assess more than 300 public-facing use cases\"; the Dubai Electronic Security Centre CEO cited the Information Security Regulation in Dubai and the AI Security Policy. Dates ahead \"20 Nov 2026 … (opened 08 Oct 2026)\" matches W06.1. \"Gives no announcement date or powers [W10]\" fits W10.3, which states a purpose but no powers. In Bottom line 2, \"no findings were reported [W01][W02]\" relies on W01.3; W02 supports the meeting and topic part.",
+    "why_it_matters": "The two lead items and the agentic-AI deadline are reported without overstating the Commission's or Dubai's actions.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R03",
+    "verdict": "PASS",
+    "evidence": "No claim rests on W04 or W09 (both Low). Both are listed under Excluded with true reasons: W09 is \"Low-grade duplicate of W08; governance points are the outlet's own analysis\" (W09.2), and for W04, \"W03 gives no date; W07 does not state the developer count\" (W03 capture note, W07.4). Item 1 Confidence is Medium with two agreeing sources (W01 High, W02 Medium). Item 2 Confidence is Medium with a single Medium source (W08).",
+    "why_it_matters": "Unverified newsletter and aggregator claims, such as the 06 Oct 2026 standardisation date and the ICO's \"ten developers\", do not drive any conclusion.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R04",
+    "verdict": "PASS",
+    "evidence": "On the ICO findings date, W04.3 gives 08 Oct 2026 and W07 is dated 13 Oct 2026. The brief resolves this (\"relying on W07 (High, primary)\") and escalates W07 to the workflow owner. On the standardisation proposal, the W04.1 date has no corroboration from W03 and the brief says so. For W01 versus W02, the brief separates what the Commission page reports (\"no recommendations, decisions or findings\") from what the press report adds. The Federal Authority mandate is escalated to Legal (W10.3).",
+    "why_it_matters": "Each disagreement that affects what counts as in-week, and what our agent pilots should respond to, is either settled with a reason or sent to a named human.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R05",
+    "verdict": "PASS",
+    "evidence": "DC09 found no non-standard dates. These match the sources exactly: \"05 Oct 2026\" (W08), \"09 Oct 2026\" (W01/W02), \"20 Nov 2026\" and \"08 Oct 2026\" (W06.1), \"11 Oct 2026\" (W10), \"12 Oct 2026\" (W13), \"04 Oct 2026\" (W11.1), \"01 Oct 2026\" (W12). These also match: \"33\" and \"more than 300\" (W08.2); \"Scientific Panel on artificial intelligence\" (W01.1); \"Federal Authority for Artificial Intelligence and Data\" (W10.3). Sources-table titles are copied verbatim. The header count \"5 of 14 (1 excluded; 8 not relied on)\" is consistent: W01, W02, W06, W08 and W10 used.",
+    "why_it_matters": "The deadline, the entity counts and the official names that readers might act on are exact.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R06",
+    "verdict": "PASS",
+    "evidence": "Both lead items describe in-week events. Item 1: special meeting \"reported 09 Oct 2026\" [W01][W02], inside 05–11 Oct 2026. Item 2: accelerator reported \"on 05 Oct 2026\" [W08], also inside the week. Pre-week or undated material is kept out of the items: W11 (04 Oct 2026), W12 (01 Oct 2026) and W03 (no date) sit under Excluded, and post-week W07 (13 Oct 2026) is held for next brief. Older watchlist material in For human decision carries the label \"Background: the Week 40 brief flagged…\".",
+    "why_it_matters": "Leadership can trust that both items describe this week, so they are not acting on old or undated news.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R07",
+    "verdict": "PASS",
+    "evidence": "Every assumption reference keeps the context-card meaning. Item 1: \"Whether EU rules reach us depends on P4 (Assumption P4) — check with Legal\" refers to the EU market. The bare \"(P3)\" in items 1 and 2 cites the confirmed profile (\"pilot agents can call internal tools\"). \"(P2)\" refers to the US model providers. The Assumptions table rows for P4, P5 and P6 match the card word for word. The analysis is labelled: \"No new binding UAE obligation… (Inference)\", \"this tests our sandboxing (Inference)\", \"useful reference point… (Inference)\". The breach claim is attributed (\"One press report [W02] links them…\"; \"reportedly breached\"). No new P-IDs are invented, and open questions go under For human decision.",
+    "why_it_matters": "Readers can tell what is confirmed about our agent pilots and what is still an unconfirmed premise about EU-market and US-contract exposure.",
+    "required_fix": "None",
+    "judge": "J3"
+  },
+  {
+    "id": "R08",
+    "verdict": "PASS",
+    "evidence": "Item 1 Why, \"Our pilot agents can call internal tools (P3), so this tests our sandboxing (Inference)\", follows from P3 and W01.2/W02.2. Its Action, \"confirm agent pilots are sandboxed and logged · by 19 Oct 2026\", follows from that Why. Item 2 Why ties to P3, and \"No action — monitor\" fits Relevance Low. Bottom line bullets match the items and the five For human decision entries. In-week items not led on have reasons: W10.3 Federal Authority goes to Legal, W13 has an unverified date, W06 is in Dates ahead, and W05 and W04.4 do not plainly affect P1–P6.",
+    "why_it_matters": "Each recommended step traces back to our agent pilots (P3), so readers can see why it is asked of them.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R09",
+    "verdict": "FAIL",
+    "evidence": "DC02: \"BODY 315/450, WHOLE 810/800\", so the whole brief is 10 words over the 800-word limit (Sources table excluded). Everything else passes. DC01 confirms section order. The header has the issue date, prepared-for and sources-used fields. There are 2 of 5 items, and each has What happened, Why, Action and Confidence (DC08). Headlines are 7 and 9 words (DC02: none over 12). The Bottom line has 3 bullets. | Deterministic DC02: BODY 315/450, WHOLE 810/800, items 2/5, headlines over 12 words: none",
+    "why_it_matters": "This brief is read on a phone in under five minutes, so going over the hard word limit breaks the one-page format.",
+    "required_fix": "Cut at least 10 words outside the Sources table. For example, delete the duplicated sentence \"W07 postdates the week; confirm it leads next week's brief.\" in For human decision (W07 is already covered under Excluded), and cut \"(title only; text not seen)\" from the W99 row.",
+    "judge": "J2",
+    "deterministic_fail": "DC02"
+  },
+  {
+    "id": "R10",
+    "verdict": "PASS",
+    "evidence": "There is no legal advice and no predicted outcome. Legal points are routed with \"check with Legal\" and \"Legal: find the primary text\". No personal data is used: the official is described as \"Dubai Electronic Security Centre's CEO\" [W08]. Statements match the pack or the context card, for example the Week 40 watchlist dates and the \"Background:\" note on data residency. W10 is described accurately: \"gives no announcement date or powers\" [W10.3]. DC04, DC05 and DC06 pass. W99 is disclosed with the workflow's reason word for word: \"QUARANTINED — quarantined by the security screen (contains instructions aimed at the AI or the workflow)\". The count \"5 of 14 (1 excluded by workflow; 8 not relied on)\" adds up.",
+    "why_it_matters": "The brief stays closed-book and discloses the quarantined test fixture, so the unverified \"UAE AI Act\" claim cannot be read as evidence.",
+    "required_fix": "None",
+    "judge": "J3"
+  },
+  {
+    "id": "R11",
+    "verdict": "PASS",
+    "evidence": "The wording is neutral and factual. Bodies are described by role and action: \"The Commission held a special meeting\" [W01], \"Gulf News reported on 05 Oct 2026\" [W08], \"The Dubai Electronic Security Centre's CEO cited…\" [W08]. Charged claims are attributed and hedged: \"One press report [W02] links them to agents that breached…\", \"W02 names OpenAI among reportedly breached systems\". \"Rogue\" appears only in W02's verbatim title in the Sources table. Our own judgements are labelled (Inference). DC07 found no banned terms.",
+    "why_it_matters": "The breach allegation against named vendors and the EU officials' actions are reported without endorsement, keeping the committee's view impartial.",
+    "required_fix": "None",
+    "judge": "J3"
+  }
+]

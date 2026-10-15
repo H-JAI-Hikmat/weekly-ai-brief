@@ -53,4 +53,4 @@ def audit(run, policy, cfg, ctx, sources, brief, round_no):
     run.write(f"audit/round{round_no}_verdicts.json", json.dumps([verdicts[c] for c in CRITERIA], indent=2, ensure_ascii=False))
     fails = [verdicts[c] for c in CRITERIA if verdicts[c]["verdict"] == "FAIL"]
     run.log("audit", "verdict", round=round_no, msg=f"{11 - len(fails)}/11 PASS" + (f"; FAIL: {[f['id'] for f in fails]}" if fails else ""))
-    return verdicts, checks, fails
+    return verdicts, checks, fails, counts

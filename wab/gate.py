@@ -29,7 +29,7 @@ def request_approval(run, policy, cfg, sources, verdicts, checks, brief_rel):
         "",
         f"**Text being approved:** SHA-256 `{brief_sha}`. Any change to the text after this request invalidates the approval.",
         "",
-        "## Audit result (rubric v1.1)",
+        "## Audit result (11 criteria, rubric " + cfg["paths"]["rubric"].split("_")[-1].replace(".md", "") + ")",
         "| Criterion | Verdict | Judge |",
         "|---|---|---|",
     ]

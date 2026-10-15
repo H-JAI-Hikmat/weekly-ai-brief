@@ -109,7 +109,7 @@ def start(manifest_path, trigger="manual", operator=None):
         max_rev = policy["retry"]["audit_revisions"]
         version = 1
         for round_no in range(1, max_rev + 2):  # audits = revisions + 1 (bounded)
-            verdicts, checks, fails = audit.audit(run, policy, cfg, ctx, srcs, brief, round_no)
+            verdicts, checks, fails, counts = audit.audit(run, policy, cfg, ctx, srcs, brief, round_no)
             route.append(f"audit r{round_no} ({11 - len(fails)}/11)")
             run.save(audit_rounds=round_no, audit_verdict=f"{11 - len(fails)}/11 PASS (round {round_no})")
             if not fails:
@@ -128,7 +128,7 @@ def start(manifest_path, trigger="manual", operator=None):
             failures = [{"id": f["id"], "source": f.get("deterministic_fail") or f["judge"], "detail": f.get("evidence", ""),
                          "fix": f.get("required_fix", "")} for f in fails]
             brief = llm.call(run, policy, purpose=f"revise_{round_no}", system=prompts.DRAFT_SYSTEM,
-                             prompt=prompts.revise_prompt(ctx, srcs, brief, failures), model=cfg["models"]["drafter"])
+                             prompt=prompts.revise_prompt(ctx, srcs, brief, failures, counts), model=cfg["models"]["drafter"])
             version += 1
             run.write(f"drafts/v{version}.md", brief)
             route.append(f"revise v{version}")
