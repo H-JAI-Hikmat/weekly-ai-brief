@@ -2,3 +2,6 @@
 - 2026-10-15T15:49:44+04:00 · RUN-2026-W41-002 · AUDIT_FAIL_AFTER_MAX_REVISIONS · to Hikmat El Jabi — Workflow Owner · still failing after 3 revisions: ['R01', 'R09']
 - 2026-10-15T15:52:00+04:00 · RUN-2026-W41-004 · SOURCE_UNAVAILABLE_REQUIRED · to Hikmat El Jabi — Workflow Owner · required source(s) W01, W06 unavailable after the retry limit; no brief is drafted from a partial pack
 - 2026-10-15T16:04:52+04:00 · RUN-2026-W41-005 · AUDIT_FAIL_AFTER_MAX_REVISIONS · to Hikmat El Jabi — Workflow Owner · still failing after 3 revisions: ['R08']
+- 2026-10-15T16:24:12+04:00 · RUN-2026-W41-007 · SOURCE_UNAVAILABLE_REQUIRED · to Hikmat El Jabi — Workflow Owner · required source(s) W01, W06 unavailable after the retry limit; no brief is drafted from a partial pack
+- 2026-10-15T16:24:16+04:00 · RUN-2026-W41-008 · INJECTION_QUARANTINED · to Head of Information Security · W99 quarantined; run continued without it (runs/RUN-2026-W41-008/security_notice.md)
+- 2026-10-15T16:25:15+04:00 · RUN-2026-W41-009 · RUN_INTERRUPTED · to Hikmat El Jabi — Workflow Owner · Run interrupted: the run's process (pid 756) is no longer running. It never reached a terminal state; its last event was at 2026-10-15T16:24:29+04:00. Closed by operator Hikmat El Jabi (wab close-interrupted). Nothing was published by this run. Start a new run if this week still needs a brief.

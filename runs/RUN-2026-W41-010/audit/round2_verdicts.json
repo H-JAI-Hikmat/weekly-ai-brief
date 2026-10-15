@@ -1,0 +1,101 @@
+[
+  {
+    "id": "R01",
+    "verdict": "FAIL",
+    "evidence": "Item 1, What happened, first sentence has no Source ID: \"On 09 Oct 2026 the Commission reported a special meeting of its Scientific Panel on AI, which has been investigating recent loss-of-control incidents.\" The [W01] tag sits only on the next sentence. The rubric puts Confidence lines in scope, and three factual Confidence claims are uncited: Item 1 \"the official page reports no outcomes\" (supported by W01.3); Item 2 \"primary ICO source\" (W06); Item 3 \"the report gives no powers for the authority\" (W10.3). All other factual sentences in the Bottom line, items, tables and For human decision carry valid IDs (DC03: no unknown IDs).",
+    "why_it_matters": "The lead EU item opens with an uncited claim, so readers cannot trace the meeting or the loss-of-control framing to its source.",
+    "required_fix": "Add [W01] at the end of Item 1's first What happened sentence. Add [W01] to Item 1's Confidence reason, [W06] to Item 2's and [W10] to Item 3's.",
+    "notes": "The instruction's format example shows a Confidence line without a citation. If the approver reads Confidence reasons as meta-commentary about the source, only the Item 1 first sentence remains a breach, and that alone is enough to FAIL.",
+    "judge": "J1"
+  },
+  {
+    "id": "R02",
+    "verdict": "PASS",
+    "evidence": "Each cited extract supports its sentence. \"opened a call for evidence on 08 Oct 2026, closing 20 Nov 2026\" matches W06.1. \"on how data protection law applies to agentic AI\" matches W06.2. \"No recommendations, decisions or findings were reported\" matches W01.3. Virkkunen's title matches W01.1; the \"well equipped\" quote is attributed to W02.1. Item 3's authority sentence and 50% quote match W10.3 and W10.2. \"late responses may not be considered\" matches W06.1. Excluded-table claims match W04.1, W04.3, W04.4 and W09.2. \"AI Security Policy, cited by the Dubai Electronic Security Centre CEO\" matches W08.3.",
+    "why_it_matters": "No sentence attributes to a source a fact the source does not contain.",
+    "required_fix": "None",
+    "notes": "Bottom line \"met on loss-of-control incidents\" slightly compresses W01. W01.2–W01.3 say the panel has been investigating such incidents and the meeting was to cover frontier AI safety and security risks. Consider \"met on frontier AI safety, including loss-of-control incidents\". The Excluded entry for W04.4 drops \"in certain places\"; this is acceptable for a short claim summary.",
+    "judge": "J1"
+  },
+  {
+    "id": "R03",
+    "verdict": "PASS",
+    "evidence": "The pack's Low sources are W04 and W09. Neither is cited as evidence in any item, the Bottom line or For human decision (DC03 cited IDs: W01, W02, W06, W08, W10). Both are listed under Excluded with true reasons. \"W03 shows no date\" is true (W03 capture note). \"W07 gives no number\" is true (W07.4). \"no corroborating source in pack\" is true for Norway, W04.4. \"outlet's own analysis\" is true (W09.2). The Confidence levels rest on High or Medium sources: Item 1 Medium uses W01 (High) and W02 (Medium); Item 2 High uses W06 (High, single primary).",
+    "why_it_matters": "No claim in the brief rests on a Low-grade newsletter or aggregator.",
+    "required_fix": "None",
+    "notes": "",
+    "judge": "J1"
+  },
+  {
+    "id": "R04",
+    "verdict": "PASS",
+    "evidence": "Two possible disagreements were handled. On the ICO, W04.3 reports \"ten developers\" with findings on 8 Oct, while W07 is dated 13 Oct and gives no number (W07.4); the brief excludes the W04 claim with the reason \"W07 gives no number\". On the standardisation proposal, W04.1 dates it 06 Oct while W03 shows no date; the brief excludes it with a stated reason. W01, W02 and W04.2 agree on the 09 Oct panel meeting. No other disagreement bears on the items reported.",
+    "why_it_matters": "Readers are not left with unresolved contradictions on the EU or UK items.",
+    "required_fix": "None",
+    "notes": "",
+    "judge": "J1"
+  },
+  {
+    "id": "R05",
+    "verdict": "PASS",
+    "evidence": "The dates match their sources: 09 Oct 2026 (W01, W02); 08 Oct 2026 and 20 Nov 2026 (W06.1); 11 Oct 2026 (W10); 06 Oct 2026 (W04.1). All dates use DD Mon YYYY (DC09). The names match exactly: \"Henna Virkkunen, Executive Vice-President for Tech Sovereignty, Security and Democracy\" (W01.1); \"Federal Authority for Artificial Intelligence and Data\" (W10.3); \"Agentic AI Project\" and \"50%\" (W10.2); \"Dubai Electronic Security Centre\" and \"AI Security Policy\" (W08.3). The Round 1 R05 fix wording is retained in For human decision.",
+    "why_it_matters": "The figures and titles a CIO may repeat to the committee are exact.",
+    "required_fix": "None",
+    "notes": "\"Scientific Panel on AI\" abbreviates W01.1's \"Scientific Panel on artificial intelligence\". This is accurate, but the approver may prefer the full form.",
+    "judge": "J1"
+  },
+  {
+    "id": "R06",
+    "verdict": "PASS",
+    "evidence": "All three lead items describe events inside 05–11 Oct 2026. Item 1: \"On 09 Oct 2026 the Commission reported a special meeting\" [W01.1–W01.3; W02.1 dated 09 Oct 2026]. Item 2: \"opened a call for evidence on 08 Oct 2026\" [W06.1]. Item 3 follows the Round 1 fix. Its in-week fact is stated as new: \"A WAM report was published on 11 Oct 2026\" [W10, published 11 Oct 2026]. Both older W10 statements start with \"Background:\". The only Dates ahead row is 20 Nov 2026 [W06.1]. Out-of-week items W07 (13 Oct), W13 (12 Oct), W11 (04 Oct) and W12 (01 Oct) are not used as lead items.",
+    "why_it_matters": "Readers see only this week's changes as news, and the UAE authority item is clearly framed as an in-week report about earlier announcements.",
+    "required_fix": "None",
+    "notes": "Item 3's in-week event is only the publication of a WAM report. That is acceptable under the Round 1 fix, but the approver may judge whether it deserves a lead slot.",
+    "judge": "J2"
+  },
+  {
+    "id": "R07",
+    "verdict": "FAIL",
+    "evidence": "Item 3 Why: \"It is unconfirmed whether the new authority's rules reach a private organisation running P1–P3 (Inference).\" The phrase \"a private organisation\" is a premise about us that the context card does not contain. The card says only \"UAE-based organisation\"; P1–P6 never state private or public status. The premise is carried as fact inside the sentence, with no Assumption ID. Everything else checks out. Item 1 \"(Assumption P4)\" and the Assumptions-table row for P4 match the card's wording and confirmer. The bare (P3) references cite a confirmed card item. The Round 1 R07 fixes are present in Items 1 and 2.",
+    "why_it_matters": "Whether we are private or public sector decides if UAE public-sector rules apply to us. The watchlist already flags a public-sector data-residency rule, so this unconfirmed premise could wrongly narrow the committee's view of exposure.",
+    "required_fix": "In Item 3 Why, replace \"whether the new authority's rules reach a private organisation running P1–P3 (Inference)\" with \"whether any rules from the new authority would apply to us (P1–P3) (Inference)\". If the committee needs our sector status settled, add a For human decision question to the Head of IT Risk instead of creating a new P-ID.",
+    "notes": "The fix wording also removes the presupposition that the authority has issued rules. W10.3 gives none.",
+    "judge": "J3"
+  },
+  {
+    "id": "R08",
+    "verdict": "PASS",
+    "evidence": "Each Why rests on the profile. Item 1 cites P3 and P4, and its Action is \"No action — monitor\". Item 2 cites P3 and \"only if we process UK personal data (Inference)\"; its Action is \"Head of IT Risk · ask Legal whether to respond · by 30 Oct 2026\". Item 3 follows the Round 1 fix: \"unconfirmed whether the new authority's rules reach a private organisation running P1–P3 (Inference)\"; its Action is \"ask Legal to obtain primary texts · by 30 Oct 2026\". The three Bottom line bullets match items 1–3. No in-week development in the pack that plainly affects P1–P6 is missing. W08 (05 Oct) is a Dubai government programme; it is referenced in For human decision. W05 covers UK healthcare only. W03/W04 are listed as Excluded with reasons.",
+    "why_it_matters": "Each recommended step traces to a stated exposure in our profile, so leadership can act or monitor without guessing why.",
+    "required_fix": "None",
+    "notes": "1) Item 1's Why ends \"check with Legal\" while its Action is \"No action — monitor\". The approver may prefer pointing to the P4 row in Assumptions to confirm. 2) Item 2's Why, its Action and the first For human decision question all raise the UK-data question; one mention could be trimmed.",
+    "judge": "J2"
+  },
+  {
+    "id": "R09",
+    "verdict": "PASS",
+    "evidence": "DC01: sections are in the required order, followed by the workflow-added Sources section. DC02: BODY 390/450, WHOLE 608/850, items 3/5, no headline over 12 words; the longest is item 3 at 12 words. DC08: all items complete. Each item has What happened (1–3 sentences), Why it matters to us, Action and Confidence. The Bottom line has 3 bullets. The Dates ahead, Excluded or unverified and Assumptions to confirm tables have the required columns. Each Excluded reason is 15 words or fewer, the longest being 10 words. The title line uses \"Week of 05 Oct – 11 Oct 2026\".",
+    "why_it_matters": "The brief stays within one phone-readable page in the format the committee expects.",
+    "required_fix": "None",
+    "notes": "",
+    "judge": "J2"
+  },
+  {
+    "id": "R10",
+    "verdict": "PASS",
+    "evidence": "Legal-dependent points defer to Legal: Item 1 \"check with Legal\"; Item 2 \"It matters only if we process UK personal data (Inference); check with Legal\" and Action \"ask Legal whether to respond\". The brief makes no court or regulator outcome predictions. The only named person is a public official, named as reported (W01.1). Facts trace to the pack: W01.2–W01.3, W06.1–W06.2, W10.2–W10.3, W08.3. The workflow excluded no sources (DC05). DC04 and DC06 also pass.",
+    "why_it_matters": "Leaders acting on this brief get evidence-bound statements and are sent to Legal wherever an interpretation is needed.",
+    "required_fix": "None",
+    "notes": "Item 3's \"the new authority's rules\" presupposes rules that W10 does not report. The R07 fix resolves this.",
+    "judge": "J3"
+  },
+  {
+    "id": "R11",
+    "verdict": "PASS",
+    "evidence": "Officials are described by role and action: \"Henna Virkkunen, Executive Vice-President for Tech Sovereignty, Security and Democracy [W01], said…\" (Round 1 R11 fix applied). Her opinion is attributed: said Europe is \"well equipped\" for rogue AI agents [W02]. \"loss-of-control incidents\" is the Commission's own phrase (W01.2). Elsewhere the wording is neutral and factual: \"No recommendations, decisions or findings were reported\". DC07 found no banned terms.",
+    "why_it_matters": "Neutral, attributed wording lets the committee weigh the EU's position without the brief appearing to endorse or dramatise it.",
+    "required_fix": "None",
+    "notes": "\"rogue AI agents\" is Cryptopolitan's paraphrase (W02.1), not a verbatim quote from Virkkunen. The approver may prefer \"autonomous AI agents\" or attributing the term to the outlet. This is not a breach, because the source reports it as her remark.",
+    "judge": "J3"
+  }
+]

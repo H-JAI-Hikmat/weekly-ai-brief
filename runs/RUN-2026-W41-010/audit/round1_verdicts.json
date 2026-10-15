@@ -1,0 +1,101 @@
+[
+  {
+    "id": "R01",
+    "verdict": "PASS",
+    "evidence": "Every factual sentence in the Bottom line, items, Dates ahead, Excluded table and For human decision carries an ID that exists in the pack, e.g. \"closing 20 Nov 2026 [W06]\" and \"aims to convert 50%… [W10]\". The Why lines are labelled (Inference) or (Assumption P4). DC03: unknown IDs none. The Confidence reasons, e.g. \"the official page reports no outcomes\" and \"the report gives no powers for the authority\", describe the evidence base without IDs. This matches the instruction's own format example, so it is not treated as a breach.",
+    "why_it_matters": "Readers can trace every claim about EU, UK and UAE developments to a pack source.",
+    "required_fix": "None",
+    "notes": "Optional: add IDs to the Confidence reasons, e.g. \"the official page reports no outcomes [W01.3]\" and \"the report gives no powers for the authority [W10]\".",
+    "judge": "J1"
+  },
+  {
+    "id": "R02",
+    "verdict": "PASS",
+    "evidence": "\"No recommendations, decisions or findings were reported [W01]\" matches W01.3. \"said Europe is 'well equipped' for rogue AI agents [W02]\" matches W02.1. \"opened… 08 Oct 2026, closing 20 Nov 2026\" matches W06.1/W06.2. \"announced the Federal Authority for Artificial Intelligence and Data, to integrate national data, AI and digital government systems [W10]\" matches W10.3. \"50%… 'autonomous, AI-driven models within two years'\" matches W10.2. \"late responses may not be considered\" matches W06.1. Excluded reasons match W03 (no date), W07.4 (no number) and W09.2 (outlet's own analysis).",
+    "why_it_matters": "The UAE authority claim is supported only for its announcement, not its powers. The brief keeps to that, so it does not overstate the open watchlist question.",
+    "required_fix": "None",
+    "notes": "Bottom line 1 and the item 1 headline say the panel \"met on loss-of-control incidents\". W01 gives the meeting topic as frontier AI safety and security risks (W01.3) and says the panel \"has been investigating\" those incidents (W01.2). The link is supported more directly if [W02] (W02.2) is added, or by \"met on frontier AI safety and risks [W01]\".",
+    "judge": "J1"
+  },
+  {
+    "id": "R03",
+    "verdict": "PASS",
+    "evidence": "The Low-grade sources W04 and W09 are never cited as evidence outside \"Excluded or unverified\". Both are listed there with true reasons: \"W03 shows no date, so week cannot be confirmed\" (W03 published: Not shown), \"W07 gives no number\" (W07.4), \"no corroborating source in pack\" (W04.4), and \"outlet's own analysis, not programme requirements\" (W09.2). Confidence levels are consistent: item 2 is High on a single High primary source (W06), and items 1 and 3 are Medium.",
+    "why_it_matters": "No claim in the brief rests on a newsletter or aggregator alone.",
+    "required_fix": "None",
+    "notes": "",
+    "judge": "J1"
+  },
+  {
+    "id": "R04",
+    "verdict": "PASS",
+    "evidence": "Disagreements that bear on the brief are handled. W04.1 dates the standardisation proposal to 06 Oct 2026, which W03 cannot confirm; this is excluded with a reason. W04.3 says \"ten developers\", which W07.4 does not state; this is excluded with a reason. W01 and W02 agree on the 09 Oct 2026 meeting, as does W04.2. W08 and W09 agree on 33 entities and 300+ use cases.",
+    "why_it_matters": "The brief does not present contested dates or numbers as settled.",
+    "required_fix": "None",
+    "notes": "W04.3 dates the ICO developer findings to 08 Oct 2026, but W07 is dated 13 Oct 2026, which is outside the week. The item is excluded, so this does not affect the brief. The approver may want the Excluded reason to mention the date gap as well.",
+    "judge": "J1"
+  },
+  {
+    "id": "R05",
+    "verdict": "FAIL",
+    "evidence": "For human decision: \"should the Dubai AI Security Policy, cited in [W08], be reviewed\". W08.3 gives the name as \"the AI Security Policy\", listed alongside \"the Information Security Regulation in Dubai\". The brief adds \"Dubai\" to the policy's title, and nothing in the pack gives the policy that name or says it is Dubai's. All other dates, numbers and names match: 09 Oct 2026, 08 Oct 2026, 20 Nov 2026, 11 Oct 2026, 50%, Henna Virkkunen, Federal Authority for Artificial Intelligence and Data, Agentic AI Project. DC09 found no non-standard dates.",
+    "why_it_matters": "The Head of Information Security could search for or adopt a policy under a name the source does not give.",
+    "required_fix": "Replace \"the Dubai AI Security Policy, cited in [W08]\" with \"the AI Security Policy, cited by the Dubai Electronic Security Centre CEO [W08]\".",
+    "notes": "\"Scientific Panel on AI\" shortens W01's \"Scientific Panel on artificial intelligence\". This is acceptable, but the full name is safer under C8.",
+    "judge": "J1"
+  },
+  {
+    "id": "R06",
+    "verdict": "FAIL",
+    "evidence": "Item 3 leads with older material that has no \"Background:\" label: \"A WAM report published 11 Oct 2026 says the UAE announced the Federal Authority for Artificial Intelligence and Data… [W10]\" and \"The federal Agentic AI Project aims to convert 50%…\" [W10]. W10 is a 2026 year-in-review roundup (W10.2–W10.4). It gives no date inside 05–11 Oct 2026 for either the authority announcement or the Agentic AI Project. The Week 40 watchlist already tracked the Federal Authority, so the announcement came before this week. Only the report's publication falls in the week, not the events it describes. Items 1 (09 Oct 2026, W01/W02) and 2 (08 Oct 2026, W06) are in-week.",
+    "why_it_matters": "Readers will take item 3 as a new UAE development this week, when the pack only shows an in-week recap of earlier announcements already on the watchlist.",
+    "required_fix": "In item 3, start the two W10 sentences with \"Background:\" and state only the in-week fact as new (WAM report published 11 Oct 2026). Otherwise remove item 3 as a lead item and the matching Bottom line bullet.",
+    "notes": "C14 says a carried watchlist item is mentioned only when a pack source updates it. W10 gives no powers for the authority, so the approver may prefer dropping item 3 to relabelling it.",
+    "judge": "J2"
+  },
+  {
+    "id": "R07",
+    "verdict": "FAIL",
+    "evidence": "Item 1: \"EU rules reach us only if we place AI on the EU market (Assumption P4).\" This states the legal reach of EU rules as fact. That premise is not P4's meaning, which is only that we do not place AI on the EU market (context card), and no pack extract (W01, W02) says it. Item 2: \"Our agent pilots (P3) fall within the topic.\" This is an unlabelled judgement that our pilots are in the scope of W06.2, phrased as fact. Other uses are consistent: bare P3 in item 1 and in For human decision; the P4 row in Assumptions to confirm matches the context card exactly.",
+    "why_it_matters": "Leaders may read an unsupported claim about EU legal scope as established fact and wrongly rule out EU exposure for our agent pilots.",
+    "required_fix": "Item 1: replace with \"EU AI rules may reach us if we place AI on the EU market (Inference); we assume we do not (Assumption P4).\" Item 2: add \"(Inference)\" after \"Our agent pilots (P3) fall within the topic\".",
+    "notes": "Item 3's \"expectations of government suppliers (Inference)\" is labelled correctly. The profile does not say we are a government supplier, so the approver may want to check its relevance.",
+    "judge": "J3"
+  },
+  {
+    "id": "R08",
+    "verdict": "FAIL",
+    "evidence": "Item 3 Why: \"Federal direction may shape expectations of government suppliers (Inference).\" No profile entry (P1–P6) says we supply government, so this Why does not follow from the profile. Item 3 Action: \"Head of IT Risk · ask Legal to obtain primary texts · by 30 Oct 2026\" does not follow from that Why. It repeats the Week 40 open question about the authority's powers instead of addressing supplier expectations. Items 1 and 2 are sound: P3/P4 lead to \"No action — monitor\", and P3 plus UK personal data leads to the Legal check by 30 Oct 2026. The Bottom line agrees with the items. No plainly relevant in-week omission was found: W11 (04 Oct) and W12 (01 Oct) fall before the week, W07 (13 Oct) after it, and W13's open date is not shown.",
+    "why_it_matters": "Item 3 asks IT Risk and Legal to act on a premise about our organisation that the profile does not contain, and the action does not match the stated reason.",
+    "required_fix": "Rewrite item 3's Why so it rests on the profile: for example, that it is unconfirmed whether the new authority's rules reach a private organisation running P1–P3 (Inference). Keep the Action as the step that follows from that, or use \"No action — monitor\". If a government-supplier premise is needed, raise it under For human decision rather than inventing a new P ID.",
+    "notes": "W08 (Dubai agentic AI accelerator, 05 Oct 2026, in-week, cites the Dubai AI Security Policy) appears only under For human decision. The approver may consider whether it deserves an item for P3. It is not plainly required, since the programme covers government entities. Bottom line bullet 3 (\"A High-grade report supports the announced…\") describes source grading rather than the development; plainer wording would help readers.",
+    "judge": "J2"
+  },
+  {
+    "id": "R09",
+    "verdict": "PASS",
+    "evidence": "DC01: sections are in the required order (the Sources section is appended by the workflow). DC02: BODY 353/450, WHOLE 566/850, 3/5 items, no headline over 12 words. Headline word counts: item 1 \"EU scientific panel meets on frontier AI loss-of-control incidents\" (9), item 2 (7), item 3 (11). Each item has What happened (1–3 sentences), Why it matters to us (1–2 sentences), Action in \"Owner · action · by DD Mon YYYY\" or \"No action — monitor\" form, and Confidence with a reason. The Bottom line has 3 bullets. Each Excluded reason is 15 words or fewer. The header date format matches \"Week of 05 Oct – 11 Oct 2026\".",
+    "why_it_matters": "The brief fits the one-page, five-minute phone read the IT leadership audience needs.",
+    "required_fix": "None",
+    "notes": "",
+    "judge": "J2"
+  },
+  {
+    "id": "R10",
+    "verdict": "FAIL",
+    "evidence": "Item 1: \"EU rules reach us only if we place AI on the EU market\" is a legal-interpretation gloss on EU applicability. No pack source states it (W01.1–W01.4, W02.1–W02.3 contain nothing on territorial scope), and it is given as a conclusion without \"check with Legal\" (C6). No outcome predictions found. No personal or confidential data: Henna Virkkunen is a public official named as in W01.1 and W02.1 (DC06 PASS). Disclosure: no workflow-excluded sources (DC05 PASS). Low-grade W04 and W09 are disclosed under Excluded.",
+    "why_it_matters": "An unsourced statement about when EU law applies to us is effectively legal advice from outside the pack.",
+    "required_fix": "Recast the sentence as labelled analysis tied to P4 (see R07 fix) and append \"check with Legal\", or delete it.",
+    "notes": "For human decision 1 asks whether the ICO call for evidence \"applies to us\". W06 describes a voluntary call for evidence, not a binding rule. Consider \"…so that responding to the ICO agentic AI call for evidence [W06] is relevant to us?\"",
+    "judge": "J3"
+  },
+  {
+    "id": "R11",
+    "verdict": "FAIL",
+    "evidence": "Item 1: \"Henna Virkkunen said Europe is \\\"well equipped\\\" for rogue AI agents [W02].\" The official is named without her role, although the pack gives it (\"Executive Vice-President for Tech Sovereignty, Security and Democracy\" in W01.1; \"the EU's tech chief\" in W02.1). C11 requires officials to be described by role and action. The rest of the brief is neutral: opinions are attributed and no banned terms were found (DC07 PASS).",
+    "why_it_matters": "Readers need the speaker's role to judge the weight of an EU official's statement on agent risks.",
+    "required_fix": "Insert her role: \"Henna Virkkunen, Executive Vice-President for Tech Sovereignty, Security and Democracy [W01], said…\" (or \"the EU's tech chief\" [W02]).",
+    "notes": "\"rogue\" is W02's paraphrase, not quoted speech. Consider \"for what the outlet called rogue AI agents\". Bottom line 3 (\"A High-grade report supports the announced…\") uses internal grading language. Consider \"WAM reported the UAE announced the Federal Authority for Artificial Intelligence and Data [W10].\"",
+    "judge": "J3"
+  }
+]

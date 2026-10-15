@@ -1,0 +1,63 @@
+{
+  "run_id": "RUN-2026-W41-007",
+  "started_at": "2026-10-15T16:23:58+04:00",
+  "operator": "Hikmat El Jabi",
+  "trigger": "manual",
+  "workflow_version": "1.3.0",
+  "policy_version": "1.2",
+  "policy_sha256": "fea2242d008921eb8da50a4eb3912283d4ab8d7bee19ee8693119d27a7e2baa2",
+  "week": "2026-W41",
+  "manifest": "inbox/2026-W41/manifest_proof-c_capture-failure.yaml",
+  "status": "ESCALATED",
+  "retry_count": 4,
+  "llm_calls": 0,
+  "llm_cost_usd": 0.0,
+  "input_source_ids": [
+    "W01",
+    "W02",
+    "W03",
+    "W04",
+    "W05",
+    "W06",
+    "W07",
+    "W08",
+    "W09",
+    "W10",
+    "W11",
+    "W12",
+    "W13"
+  ],
+  "test_fixtures": [],
+  "unavailable": [
+    {
+      "id": "W01",
+      "required": true,
+      "reason": "capture missing; live fetch failed after 3 attempts (HTTPSConnectionPool(host='digital-strategy.ec.europa.eu', port=443): Max retries exceeded with url: /en/news/commission-holds-special-meeting-scientific-panel-frontier-ai-safety-and-risks (Caused by P)"
+    },
+    {
+      "id": "W06",
+      "required": true,
+      "reason": "capture missing; live fetch failed after 3 attempts (HTTPSConnectionPool(host='ico.org.uk', port=443): Max retries exceeded with url: /about-the-ico/ico-and-stakeholder-consultations/2026/10/agentic-ai-call-for-evidence/ (Caused by ProxyError('Unable to)"
+    }
+  ],
+  "fallback": "missing sources marked UNAVAILABLE and disclosed; no substitute content; run stopped before drafting",
+  "route": "preflight → collect → STOP SOURCE_UNAVAILABLE_REQUIRED",
+  "checks_performed": [
+    "kill switch",
+    "data classification",
+    "one publication per week",
+    "runs per week (per policy version)",
+    "interrupted runs",
+    "capture hashes",
+    "fetch allowlist",
+    "required sources"
+  ],
+  "final_status": "ESCALATED",
+  "ended_at": "2026-10-15T16:24:12+04:00",
+  "errors": [
+    "SOURCE_UNAVAILABLE_REQUIRED: required source(s) W01, W06 unavailable after the retry limit; no brief is drafted from a partial pack"
+  ],
+  "escalation_code": "SOURCE_UNAVAILABLE_REQUIRED",
+  "escalation_recipient": "Hikmat El Jabi — Workflow Owner",
+  "stop_confirmation": "Run ended in terminal state ESCALATED at 2026-10-15T16:24:12+04:00. Nothing published by this run (published/2026-W41.md absent — verified)."
+}
