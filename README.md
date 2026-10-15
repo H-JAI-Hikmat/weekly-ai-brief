@@ -40,7 +40,7 @@ Requirements: Python 3.10+, `git`, and [Claude Code](https://docs.claude.com) si
 ```bash
 git clone https://github.com/H-JAI-Hikmat/weekly-ai-brief && cd weekly-ai-brief
 pip install pyyaml requests
-python -m unittest -v tests.test_controls        # 17 offline tests of the gates — no model calls, no pushes
+python -m unittest -v tests.test_controls        # 25 offline tests of the gates and failure paths — no model calls, no network, no pushes
 ```
 
 The model is called as `claude -p --tools "" --strict-mcp-config --system-prompt … --model <sonnet|opus> --no-session-persistence`, from an empty folder, so the model has **no tools at all**: text in a source cannot make it act. A self-hosted OpenAI-compatible endpoint (e.g. vLLM) can replace it by changing `wab/llm.py`; the gates do not depend on the provider.
@@ -62,7 +62,7 @@ Cron example: `0 7 * * 1 cd /path/to/weekly-ai-brief && TZ=Asia/Dubai python -m 
 
 ## Inputs
 
-`inbox/<week>/manifest.yaml` lists each source (ID, URL, publisher, date, required flag) and its capture file with a SHA-256. Captures are made by the capture step (Claude web search and page capture in the proof environment). The brief's Sources table and source count are built by the workflow from the manifest, not written by the model. If a capture is missing, the workflow tries a GET-only fetch from an allowlisted domain ([`config/source_registry.yaml`](config/source_registry.yaml)). It never fills a gap with other content.
+`inbox/<week>/manifest.yaml` lists each source (ID, URL, publisher, date, required flag) and its capture file with a SHA-256. Captures are made by the capture step (Claude web search and page capture in the proof environment). The brief's Sources table and source count are built by the workflow from the manifest, not written by the model. In the proof environment the capture tool summarises each page body (quoted phrases stay verbatim), so the audit checks the brief against the capture rather than the live page. The approver can open every source from the links in the Sources table. If a capture is missing, the workflow tries a GET-only fetch from an allowlisted domain ([`config/source_registry.yaml`](config/source_registry.yaml)). It never fills a gap with other content.
 
 ## Secrets and personal data
 

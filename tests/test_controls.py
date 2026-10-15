@@ -202,5 +202,95 @@ class EngineBounds(Base):
         self.assertTrue((run.dir / "error.txt").exists())
 
 
+class DesignedFailurePaths(Base):
+    """Paths the proof runs did not exercise, tested offline with the model, network and git mocked."""
+
+    def test_kill_switch_stops_a_run_before_anything_happens(self):
+        stop = ROOT / self.policy["stop_rules"]["kill_switch_file"]
+        self.assertFalse(stop.exists(), "a real STOP file is present; refusing to run this test")
+        stop.write_text("test")
+        self.addCleanup(lambda: stop.unlink(missing_ok=True))
+        run = engine.start(_manifest(self.run.dir), "manual", "test")
+        self.assertEqual((run.state["final_status"], run.state["errors"][0].split(":")[0]), ("STOPPED", "KILL_SWITCH"))
+
+    def test_non_public_data_is_blocked(self):
+        rel = _manifest(self.run.dir)
+        m = yaml.safe_load((ROOT / rel).read_text()); m["classification"] = "internal"
+        (ROOT / rel).write_text(yaml.safe_dump(m))
+        run = engine.start(rel, "manual", "test")
+        self.assertEqual(run.state["final_status"], "BLOCKED_BY_POLICY")
+        self.assertTrue(run.state["errors"][0].startswith("DATA_NOT_PUBLIC"))
+
+    def test_weekly_run_cap_blocks_the_seventh_run_under_one_policy_version(self):
+        for i in range(1, 7):
+            Run(f"RUN-2099-W01-{i:03d}").save(run_id=f"RUN-2099-W01-{i:03d}", policy_version=self.policy["version"], status="REJECTED", final_status="REJECTED")
+        run = engine.start(_manifest(self.run.dir), "manual", "test")
+        self.assertEqual(run.id, "RUN-2099-W01-007")
+        self.assertEqual(run.state["escalation_code"], "TOO_MANY_RUNS")
+
+    def test_model_failure_is_retried_then_escalated_without_substitution(self):
+        from wab import llm
+        failed = mock.Mock(returncode=1, stdout="", stderr="overloaded")
+        with mock.patch("wab.llm.subprocess.run", return_value=failed) as sp, mock.patch("wab.llm.time.sleep"), \
+                mock.patch("wab.llm.shutil.which", return_value="/usr/bin/claude"):
+            with self.assertRaises(PolicyStop) as e:
+                llm.call(self.run, self.policy, purpose="draft", system="s", prompt="p", model="sonnet")
+        self.assertEqual(e.exception.code, "LLM_UNAVAILABLE")
+        self.assertEqual(sp.call_count, self.policy["retry"]["llm"]["max_attempts"])
+        self.assertTrue(all(c.args[0][c.args[0].index("--model") + 1] == "sonnet" for c in sp.call_args_list))  # no silent model swap
+
+    def test_model_call_and_wall_time_budgets(self):
+        from wab import llm
+        self.run.save(llm_calls=self.policy["budgets"]["max_llm_calls_per_run"])
+        with self.assertRaises(PolicyStop) as e:
+            llm.call(self.run, self.policy, purpose="x", system="s", prompt="p", model="sonnet")
+        self.assertEqual(e.exception.code, "BUDGET_EXCEEDED")
+        self.run.save(llm_calls=0, started_at=iso(now() - dt.timedelta(minutes=self.policy["budgets"]["max_wall_minutes"] + 1)))
+        with self.assertRaises(PolicyStop) as e:
+            llm.call(self.run, self.policy, purpose="x", system="s", prompt="p", model="sonnet")
+        self.assertEqual(e.exception.code, "BUDGET_EXCEEDED")
+
+    def test_too_many_unavailable_sources_stops_before_drafting(self):
+        (self.run.dir / "ok.md").write_text("text")
+        manifest = {"sources": [{"id": f"X{i}", "url": "https://not-allowlisted.test/a", "capture": None, "required": False} for i in range(2)]
+                    + [{"id": f"Y{i}", "url": "https://x.test/a", "capture": "ok.md", "required": False} for i in range(2)]}
+        with self.assertRaises(PolicyStop) as e:
+            sources.collect(self.run, self.policy, manifest, self.run.dir)
+        self.assertEqual(e.exception.code, "TOO_MANY_UNAVAILABLE")
+
+    def test_invalid_judge_output_gets_one_repair_then_fails_with_escalate(self):
+        from wab import audit
+        srcs = [{"id": "W01", "status": "AVAILABLE", "grade": "High", "publisher": "P", "author": "A", "date": "06 Jan 2099", "url": "u", "text": "t", "title": "T"}]
+        ctx = {"window_label": "x", "issue_date": "y", "n_total": 1, "n_available": 1, "watchlist": "None."}
+        def fake(run, policy, *, purpose, **kw):
+            if purpose.endswith("_J1"):
+                return "not json"
+            crits = {"J2": ["R06", "R08", "R09"], "J3": ["R07", "R10", "R11"]}[purpose[-2:]]
+            return json.dumps([{"id": c, "verdict": "PASS"} for c in crits])
+        with mock.patch("wab.audit.llm.call", side_effect=fake) as calls:
+            verdicts, checks, fails, counts = audit.audit(self.run, self.policy, self.cfg, ctx, srcs, EngineBounds.LONG, 1)
+        self.assertEqual(sum(c.kwargs["purpose"].endswith("_J1") for c in calls.call_args_list), 2)   # one repair attempt only
+        for c in ("R01", "R02", "R03", "R04", "R05"):
+            self.assertEqual(verdicts[c]["verdict"], "FAIL")
+            self.assertTrue(verdicts[c]["required_fix"].startswith("ESCALATE"))
+
+    def test_push_failure_is_retried_then_escalated_and_text_kept(self):
+        self.paused()
+        gate.record_decision(self.run, self.policy, decision="YES", approver="Hikmat El Jabi", channel="test", statement="Approved.")
+        dest = ROOT / self.cfg["publish"]["folder"] / "2099-W01.md"
+        self.addCleanup(lambda: dest.unlink(missing_ok=True))
+        pushes = []
+        def fake_git(*args, check=True):
+            if args[0] == "push":
+                pushes.append(args); raise RuntimeError("network down")
+            return {"rev-list": "0", "rev-parse": "abc123"}.get(args[0], "")
+        with mock.patch("wab.publish._git", side_effect=fake_git), mock.patch("wab.publish.time.sleep"):
+            with self.assertRaises(PolicyStop) as e:
+                publish.publish(self.run, self.policy, self.cfg)
+        self.assertEqual(e.exception.code, "PUBLISH_FAILED")
+        self.assertEqual(len(pushes), self.policy["retry"]["publish"]["max_attempts"])
+        self.assertTrue((ROOT / self.run.state["brief_file"]).exists())   # approved text kept for the Owner
+
+
 if __name__ == "__main__":
     unittest.main()

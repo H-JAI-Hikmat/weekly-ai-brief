@@ -26,6 +26,7 @@ Policy WAB-POLICY v1.2 · Workflow v1.3.0 · Owner and sole approver: Hikmat El 
 - A YES covers only the text whose hash was shown. Any edit voids it.
 - Silence is never approval: the request expires after 72 h, the run ends `EXPIRED`, and nothing is published.
 - Running `resume` without a recorded YES is refused and logged.
+- The statement is the approver's words, recorded as given. In the proof runs, the approver answered in the Claude chat by choosing a labelled option, and the operator recorded that label word for word. The option labels were written by the assistant and included its recommendation.
 
 **Escalation.** The workflow writes `runs/<id>/escalation.md` and adds a line to `monitoring/escalations.md`.
 
@@ -64,7 +65,7 @@ A missing source is marked `UNAVAILABLE` and disclosed, never substituted or rec
 **Recover.**
 - Unavailable source: re-capture it, then start a new run. A new run has a new ID; old runs are never edited.
 - Audit failure or escalation: fix the input or the policy, raise the version if you change the policy, then re-run.
-- Push failure: check repo access, then run `resume` again. The approval stays valid until it expires.
+- Push failure (`PUBLISH_FAILED`): the approved text is kept in `runs/<id>/`, and the publish commit stays local. `resume` does not retry a run that has ended. The owner either checks repo access, pushes that commit (it contains only `published/<week>.md`) and verifies it with `git ls-remote origin main`, or removes it with `git reset --hard origin/main` and starts a new run. This is a known limitation; see `CHANGELOG.md`.
 - Expired or rejected run: start a new run.
 - Interrupted run (crash or restart): the next run's preflight closes it as `RUN_INTERRUPTED`, or run `python -m wab close-interrupted`. Then start a new run.
 
