@@ -1,0 +1,46 @@
+# Source registry: the fetch allowlist and the deterministic grading rules (instruction v1.1, C2).
+# A domain not listed here is not fetched and any capture from it is graded Low.
+version: "1.0"
+
+class_grades:
+  official: High          # government, regulator or official journal text
+  official_relay: High    # established outlet whose text is bylined to an official news agency (e.g. WAM)
+  law_firm: High          # named law-firm analysis
+  established_news: Medium
+  trade_press: Medium
+  aggregator: Low         # listing pages and newsletters without named authors
+  vendor: Low
+  blog: Low
+  unknown: Low
+
+official_agency_bylines: ["WAM", "Emirates News Agency"]
+
+domains:
+  digital-strategy.ec.europa.eu: official
+  ec.europa.eu: official
+  eur-lex.europa.eu: official
+  gov.uk: official
+  www.gov.uk: official
+  ico.org.uk: official
+  regjeringen.no: official
+  www.whitehouse.gov: official
+  wam.ae: official
+  www.wam.ae: official
+  gulfnews.com: established_news
+  www.gulftoday.ae: established_news
+  www.khaleejtimes.com: established_news
+  abcnews.com: established_news
+  www.reuters.com: established_news
+  www.nextgov.com: trade_press
+  www.techpolicy.press: trade_press
+  broadbandbreakfast.com: trade_press
+  www.cryptopolitan.com: trade_press
+  www.lexisnexis.com: trade_press
+  www.freshfields.com: law_firm
+  www.orrick.com: law_firm
+  alsuwaidi.ae: law_firm
+  aigovernancebrief.org: aggregator
+  gccainetwork.com: aggregator
+  www.modulos.ai: vendor
+  www.digitaldubai.ai: blog
+  cubbbix.com: blog

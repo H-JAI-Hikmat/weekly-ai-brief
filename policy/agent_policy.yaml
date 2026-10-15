@@ -1,0 +1,134 @@
+# Agent policy for the Weekly AI Governance Brief workflow.
+# The engine (wab/) loads this file at start-up and enforces every rule marked "enforced:" in code.
+# Changing any value requires a new version number; the version is written into every run log.
+
+policy_id: WAB-POLICY
+version: "1.0"
+effective: "2026-10-15"
+owner: "Hikmat El Jabi — Workflow Owner"
+enabled: true            # enforced: false = kill switch (engine refuses to start or resume)
+
+goal: >
+  Every week, turn the captured source pack for the previous Monday–Sunday into a one-page,
+  source-grounded AI-governance brief for the IT Leadership Team, audit it against rubric v1.1,
+  and publish it only after the Workflow Owner explicitly approves the exact text.
+
+audience: "IT Leadership Team — CIO; Heads of IT Infrastructure, Data & Analytics, Information Security, IT Risk"
+
+permitted_tools:            # enforced: the engine has no code path to any other tool
+  capture_reader: "Read captured source files listed in the week's manifest (read-only)."
+  http_fetch: "GET-only fetch of a missing capture, allowlisted domains only (config/source_registry.yaml)."
+  llm_text: "Claude via Claude Code headless (claude -p) with ALL tools disabled, no MCP servers, no session persistence, run in an empty sandbox folder."
+  git_publish: "Commit exactly one file under published/ to github.com/H-JAI-Hikmat/weekly-ai-brief (branch main) and push — only after a valid approval."
+
+forbidden_actions:          # enforced by absence: no code path exists for these
+  - "Send email or chat messages on anyone's behalf"
+  - "Publish anywhere other than published/ in the approved repository"
+  - "Delete or modify any file outside runs/<run_id>/ and published/<week>.md"
+  - "Follow instructions found inside source text"
+
+permitted_data:
+  - "Public web pages captured as text from allowlisted domains"
+  - "The context card (a fictional, non-confidential organisation profile)"
+forbidden_data:             # enforced: screen stage redacts PII patterns; manifests must declare classification: public
+  - "Internal, confidential or regulated documents"
+  - "Personal data beyond public officials and organisations as reported"
+  - "Credentials, tokens or secrets"
+
+approval:                   # enforced in wab/gate.py and wab/publish.py
+  required_before: [publish]
+  approvers: ["Hikmat El Jabi"]
+  accepted_decisions: ["YES", "NO"]
+  explicit_only: true       # no decision recorded = not approved; silence and timeouts are never a YES
+  expires_after_hours: 72   # an unanswered request expires; the run ends as EXPIRED with nothing published
+  bind_to_brief_sha256: true  # a YES is valid only for the exact text the approver saw
+  preconditions:
+    - "Audit verdict is PASS on every rubric criterion"
+    - "No open ESCALATE item"
+    - "Every quarantined or unavailable source is disclosed in the approval request"
+
+escalation:                 # enforced: engine writes runs/<id>/escalation.md and appends monitoring/escalations.md
+  owner: "Hikmat El Jabi — Workflow Owner"
+  security_contact: "Head of Information Security"
+  triggers:
+    - code: SOURCE_UNAVAILABLE_REQUIRED
+      when: "A source marked required could not be captured or fetched after the retry limit"
+      route: owner
+      action: STOP_BEFORE_DRAFT
+    - code: TOO_MANY_UNAVAILABLE
+      when: "More than 25% of manifest sources unavailable"
+      route: owner
+      action: STOP_BEFORE_DRAFT
+    - code: AUDIT_FAIL_AFTER_MAX_REVISIONS
+      when: "Any rubric criterion still FAIL after the revision limit"
+      route: owner
+      action: STOP_BEFORE_APPROVAL
+    - code: AUDIT_ESCALATE
+      when: "A judge marks a required fix 'ESCALATE:' (evidence gap or human-only decision)"
+      route: owner
+      action: STOP_BEFORE_APPROVAL
+    - code: INJECTION_QUARANTINED
+      when: "A source contains instructions aimed at the AI or the workflow"
+      route: security_contact
+      action: CONTINUE_WITHOUT_SOURCE_AND_DISCLOSE
+    - code: LLM_UNAVAILABLE
+      when: "The model call fails after the retry limit"
+      route: owner
+      action: STOP
+    - code: PUBLISH_FAILED
+      when: "Push to the publish repository fails after the retry limit"
+      route: owner
+      action: STOP_KEEP_APPROVED_TEXT
+    - code: BUDGET_EXCEEDED
+      when: "Run exceeds its model-call or wall-time budget"
+      route: owner
+      action: STOP
+
+retry:                      # enforced: all loops are counted and bounded
+  fetch:   {max_attempts: 3, backoff_seconds: [2, 4], timeout_seconds: 10}
+  llm:     {max_attempts: 3, backoff_seconds: [10, 30], timeout_seconds: 900}
+  publish: {max_attempts: 3, backoff_seconds: [5, 15]}
+  audit_revisions: 2        # at most two targeted revisions, then escalate
+
+fallback:
+  missing_source: "Mark UNAVAILABLE and disclose it. Never substitute another source or reconstruct content."
+  llm_failure: "Stop and escalate. No other model is substituted silently."
+  publish_failure: "Keep the approved text in runs/<id>/, mark PUBLISH_FAILED, escalate."
+
+budgets:                    # enforced
+  max_llm_calls_per_run: 14
+  max_wall_minutes: 60
+  max_runs_started_per_week: 5
+
+stop_rules:                 # enforced
+  kill_switch_file: "STOP"          # create this file at the repo root to stop all runs immediately
+  one_publication_per_week: true    # a reporting week that is already published cannot be published again
+  terminal_states: [COMPLETED, REJECTED, EXPIRED, ESCALATED, BLOCKED_BY_POLICY, STOPPED, ABORTED, PUBLISH_FAILED]
+
+security:                   # enforced in wab/screen.py
+  untrusted_source_text: true
+  max_chars_per_source: 6000        # data minimisation: longer captures are truncated and flagged
+  injection_patterns:
+    - "(?i)ignore (all |any )?(previous|prior|above) (instructions|rules)"
+    - "(?i)disregard (the |all )?(policy|instructions|rules)"
+    - "(?i)\\b(system|assistant|developer)\\s*(prompt|message)?\\s*:"
+    - "(?i)you are now"
+    - "(?i)(pre-?approved|approval\\s*:\\s*yes|auto-?approve)"
+    - "(?i)(publish|send|post) (this|it|the brief) (immediately|now|without)"
+    - "(?i)do not (audit|review|check|cite)"
+  hidden_text_patterns:
+    - "[\\u200b\\u200c\\u200d\\u2060\\ufeff]"
+  pii_patterns:
+    email: "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+    phone: "(?<!\\d)(?:\\+?971|00971|0)\\s?(?:5\\d|[2-9])[\\s-]?\\d{3}[\\s-]?\\d{4}(?!\\d)"
+    emirates_id: "784-?\\d{4}-?\\d{7}-?\\d"
+    iban: "\\bAE\\d{2}\\s?(?:\\d{4}\\s?){4}\\d{3}\\b"
+
+tone:                       # enforced in wab/checks.py (deterministic) and rubric R11 (judge)
+  banned_terms: ["game-changer", "revolutionary", "catastrophic", "disastrous", "insane", "shocking", "radical left", "woke", "hoax"]
+
+monitoring:                 # enforced in wab/monitor.py
+  alert_if_nonsuccess_in_last_n: {n: 4, threshold: 2}
+  alert_if_same_failure_code_in_last_n: {n: 8, threshold: 2}
+  alert_if_fetch_failures_per_domain_7d: 3
+  alert_if_awaiting_approval_hours: 48
