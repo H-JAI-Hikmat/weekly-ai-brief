@@ -1,0 +1,138 @@
+week: 2026-W41
+reporting_window:
+  start: '2026-10-05'
+  end: '2026-10-11'
+mode: live-with-redteam-fixture
+classification: public
+captured_on: '2026-10-15'
+captured_by: Capture step (Claude web search + page capture), run by the operator
+previous_watchlist: lineage/2026-W40/watchlist.md
+sources:
+- id: W01
+  title: Commission holds special meeting of Scientific panel on frontier AI safety and risks
+  publisher: European Commission — Shaping Europe's digital future
+  author: European Commission (press release)
+  date: 09 Oct 2026
+  url: https://digital-strategy.ec.europa.eu/en/news/commission-holds-special-meeting-scientific-panel-frontier-ai-safety-and-risks
+  capture: captures/W01.md
+  sha256: 3cc657d3669b9a4e29d6d1ad76ff1c40afb4301356ed8283d56570003a575c9c
+  required: true
+- id: W02
+  title: EU says AI Act leaves it "well equipped" to contain rogue AI agents
+  publisher: Cryptopolitan
+  author: Ibiam Wayas
+  date: 09 Oct 2026
+  url: https://www.cryptopolitan.com/eu-ai-act-equipped-contain-rogue-ai-agents/
+  capture: captures/W02.md
+  sha256: 4a88192d9a3d4267467fe5b4b203f4248386d7fa6c7f4ce23db2a5555d1e46ba
+  required: false
+- id: W03
+  title: Proposal for a Regulation on European standardisation, repealing Regulation (EU) No 1025/2012 (CELEX 52026PC0780)
+  publisher: EUR-Lex (Publications Office of the EU)
+  author: European Commission
+  date: Not shown in capture
+  url: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52026PC0780
+  capture: captures/W03.md
+  sha256: 57a5080fba934fc38483f6f9e5a6dc53e37970692250f13c779791e4521bfa88
+  required: false
+- id: W04
+  title: 'Weekly AI Governance Brief: 5–11 October 2026'
+  publisher: AI Governance Brief (aigovernancebrief.org)
+  author: AI Governance Brief Team
+  date: 12 Oct 2026
+  url: https://aigovernancebrief.org/weekly-ai-governance-brief-5-11-october-2026/
+  capture: captures/W04.md
+  sha256: 9c9c5d93f47e8db6f3e3740dc830cb0d72be1cc323da390626fb75e33c157883
+  required: false
+- id: W05
+  title: Government response to the National Commission's recommendations on the regulation of AI in healthcare
+  publisher: GOV.UK — Medicines and Healthcare products Regulatory Agency
+  author: MHRA
+  date: 06 Oct 2026
+  url: https://www.gov.uk/government/publications/government-response-to-the-national-commissions-recommendations-on-the-regulation-of-ai-in-healthcare
+  capture: captures/W05.md
+  sha256: d6a2131468261510a2275896e12568260bddeb44e8b3e0dcb830cf1f87d7059e
+  required: false
+- id: W06
+  title: 'Agentic AI: call for evidence'
+  publisher: Information Commissioner's Office (ICO)
+  author: ICO
+  date: 08 Oct 2026
+  url: https://ico.org.uk/about-the-ico/ico-and-stakeholder-consultations/2026/10/agentic-ai-call-for-evidence/
+  capture: captures/W06.md
+  sha256: 35b739d5dadf4bc289c678c6cf9f1265c593a32c5ee30fa5202cd61ed4f258e3
+  required: true
+- id: W07
+  title: 'Building trust and transparency into generative AI development: our work to create regulatory certainty'
+  publisher: Information Commissioner's Office (ICO)
+  author: ICO
+  date: 13 Oct 2026
+  url: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/building-trust-and-transparency-into-generative-ai-development-our-work-to-create-regulatory-certainty/
+  capture: captures/W07.md
+  sha256: ca7e2a72a894594d2575e8f9d32c908ca086345449600ccc5d3768979b738d67
+  required: false
+- id: W08
+  title: Dubai Future Foundation launches agentic AI accelerator for 33 government entities
+  publisher: Gulf News
+  author: Gulf News Report
+  date: 05 Oct 2026
+  url: https://gulfnews.com/uae/government/dubai-future-foundation-launches-agentic-ai-accelerator-for-33-government-entities-1.500698845
+  capture: captures/W08.md
+  sha256: 46218078524303c290ff18adeddb69a1fe1e8de67eee460faef46721f9bc05e4
+  required: false
+- id: W09
+  title: Dubai launches accelerator to develop agentic AI government services
+  publisher: GCC AI Network
+  author: GCC AI Network Editorial Desk (collective attribution)
+  date: 05 Oct 2026
+  url: https://gccainetwork.com/article/dubai-launches-agentic-ai-government-services-accelerator
+  capture: captures/W09.md
+  sha256: 5ba8ac081728e1a5e8a6bf367914bf6ea1152546c0afccdd2a38471131192a80
+  required: false
+- id: W10
+  title: 'UAE expands AI integration across key sectors in 2026: Report'
+  publisher: Gulf Today
+  author: WAM (Emirates News Agency)
+  date: 11 Oct 2026
+  url: https://www.gulftoday.ae/news/2026/10/11/uae-expands-ai-integration-across-key-sectors-in-2026-report
+  capture: captures/W10.md
+  sha256: 70a247c9f425f2e56280216d4c02d20e5194d4bf19e61d343b64da62f5f77d7e
+  required: false
+- id: W11
+  title: President Donald Trump announces creation of 'Super Intelligence Force' AI task force
+  publisher: ABC News
+  author: Emily Chang
+  date: 04 Oct 2026
+  url: https://abcnews.com/Politics/president-donald-trump-announces-creation-super-intelligence-force/story?id=136986122
+  capture: captures/W11.md
+  sha256: ca8e59546991bf241742ecc5a116fd202e46e72863e53d69eed93eed498d2b21
+  required: false
+- id: W12
+  title: FTC Opens Probe of AI Giants Anthropic, OpenAI Over Consumer Risks
+  publisher: Broadband Breakfast
+  author: Kate Keith
+  date: 01 Oct 2026
+  url: https://broadbandbreakfast.com/ftc-opens-probe-of-ai-giants-anthropic-openai-over-consumer-risks/
+  capture: captures/W12.md
+  sha256: 3118af6154273583dcb9f372d6485027534c2a23c8107492fcaa5f49dd4a1572
+  required: false
+- id: W13
+  title: 'Commission consults on draft AI Act implementing regulation: enforcement proceedings, access to file, confidentiality, and limitation periods for penalties'
+  publisher: LexisNexis UK — Legal News
+  author: Not stated
+  date: 12 Oct 2026
+  url: https://www.lexisnexis.com/en-gb/legal/news/commission-consults-on-ai-act-implementing-rules-for-enforcement-proceedings-penalties
+  capture: captures/W13.md
+  sha256: b3ed068b31acce830b88bfeca6bffd891038678da713bab6496c97b9c91d60a8
+  required: false
+- id: W99
+  title: UAE AI Act enters into force (TEST FIXTURE)
+  publisher: Example Gulf Tech News (test fixture)
+  author: Staff
+  date: 08 Oct 2026
+  url: https://example-gulf-tech-news.test/uae-ai-act-in-force
+  capture: ../../tests/fixtures/W99_redteam.md
+  sha256: 8e56845c585db574447d6ba240f52909927ee54ef0fc62581c8af0857c074e3c
+  required: false
+  test_fixture: true
+note: 'Proof run (b): the clean Week 41 pack plus test fixture W99, which contains instructions aimed at the AI and PII, to prove the security screen and the approval gate.'

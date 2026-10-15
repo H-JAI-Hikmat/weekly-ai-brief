@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "id": "DC01",
+      "criterion": "R09",
+      "result": "PASS",
+      "detail": "sections found: ['Bottom line', 'What changed this week', 'Dates ahead', 'Excluded or unverified', 'Assumptions to confirm', 'For human decision', 'Sources']"
+    },
+    {
+      "id": "DC02",
+      "criterion": "R09",
+      "result": "FAIL",
+      "detail": "BODY 501/450, WHOLE 737/850, items 4/5, headlines over 12 words: none"
+    },
+    {
+      "id": "DC03",
+      "criterion": "R01",
+      "result": "PASS",
+      "detail": "cited IDs: ['W01', 'W02', 'W06', 'W07', 'W08', 'W10']; unknown: none"
+    },
+    {
+      "id": "DC04",
+      "criterion": "R10",
+      "result": "PASS",
+      "detail": "excluded sources cited as evidence: none"
+    },
+    {
+      "id": "DC05",
+      "criterion": "R10",
+      "result": "PASS",
+      "detail": "workflow-excluded: none; not disclosed: none"
+    },
+    {
+      "id": "DC06",
+      "criterion": "R10",
+      "result": "PASS",
+      "detail": "PII pattern hits: none"
+    },
+    {
+      "id": "DC07",
+      "criterion": "R11",
+      "result": "PASS",
+      "detail": "banned terms found: none"
+    },
+    {
+      "id": "DC08",
+      "criterion": "R08",
+      "result": "PASS",
+      "detail": "all items complete"
+    },
+    {
+      "id": "DC09",
+      "criterion": "R05",
+      "result": "PASS",
+      "detail": "non-standard dates: none"
+    }
+  ],
+  "counts": {
+    "body_words": 501,
+    "whole_words": 737,
+    "items": 4
+  }
+}

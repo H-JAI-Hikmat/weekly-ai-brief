@@ -1,0 +1,90 @@
+[
+  {
+    "id": "R01",
+    "verdict": "FAIL",
+    "evidence": "Four factual sentences carry no Source ID. (1) Item 1: \"A Commission press release dated 09 Oct 2026 reports a special meeting of its Scientific Panel on AI.\" The citation appears only on the next sentence (W01.1). (2) Item 2: \"The UK Information Commissioner's Office (ICO) opened a call for evidence on 08 Oct 2026, closing 20 Nov 2026.\" The citation is only on the next sentence (W06.1). (3) Item 3: \"The accelerator brings together 33 Dubai Government entities to assess more than 300 public-facing use cases.\" The citation is only on the next sentence (W08.2). (4) For human decision: \"Legal: Does UK data protection law apply to our processing, which would make the ICO agentic AI call for evidence relevant?\" This states a fact about the ICO call with no ID and gives analysis without (Inference). DC03 only checks that cited IDs exist, not that every sentence is cited.",
+    "why_it_matters": "The key dates and numbers in all three lead items (meeting date, ICO open/close dates, 33 entities/300 use cases) cannot be traced to evidence by a phone reader.",
+    "required_fix": "Append [W01] to the first What happened sentence in Item 1, [W06] to the first sentence in Item 2 and [W08] to the first sentence in Item 3. In the third For human decision question, add [W06] and mark 'relevant' as (Inference), or delete the question as a repeat of Item 2.",
+    "judge": "J1"
+  },
+  {
+    "id": "R02",
+    "verdict": "PASS",
+    "evidence": "Each cited claim matches its extract. \"has been investigating recent loss-of-control incidents [W01]\" matches W01.2. \"was to present recommendations; none are reported [W01]\" matches W01.3. Virkkunen's title [W01] matches W01.1, and \"well equipped\" to deal with rogue AI agents [W02] matches W02.1, with each source cited separately. \"firms certified under the Dubai AI Seal [W08]\" matches W08.2. The Al Shaibani frameworks quote matches W08.3. \"W07 gives no number\" matches W07.4. The Federal Authority announcement with \"no date or powers\" [W10] matches W10.3, which gives only a purpose. The W03/W04 date question matches W03 capture note and W04.1.",
+    "why_it_matters": "Cited extracts do not overstate the panel meeting, where W01 reports no recommendations or findings, or the UAE authority announcement.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R03",
+    "verdict": "PASS",
+    "evidence": "No Low source supports a claim on its own. W04 appears only in the Excluded table and in the escalated date question \"only Low-grade W04 gives one [W03][W04]\". W09 is listed as \"Low grade; repeats facts in W08, not relied on\", which is true per W09.1–W09.2. The W04 exclusion reasons are true: the ten-developer figure is absent from W07 (W07.4), W03 shows no date, and no other source covers Norway. The High Confidence ratings in Items 1 and 2 rest on High-grade primary sources W01 and W06. Item 3 is correctly capped at Medium on single Medium-grade W08.",
+    "why_it_matters": "Unverified newsletter claims (W04) are kept out of the lead items, so leadership decisions do not rest on Low-grade evidence.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R04",
+    "verdict": "PASS",
+    "evidence": "The pack contains two relevant disagreements, and both are handled. W04.1 dates the standardisation proposal 06 Oct 2026, while W03 shows no date. This is escalated as \"Legal: Can the adoption date of the EU standardisation proposal (CELEX 52026PC0780) be confirmed…[W03][W04]?\" W04.3 says ten developers made or committed to improvements, while W07.4 gives no number. This is resolved in Excluded: \"Low grade; W07 gives no number [W07]\". No other pack sources contradict each other on dates, names or the existence of rules.",
+    "why_it_matters": "The standardisation date conflict could otherwise have placed an unverified event inside the reporting week.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R05",
+    "verdict": "PASS",
+    "evidence": "Dates match the sources: \"09 Oct 2026\" (W01), \"08 Oct 2026\" and \"20 Nov 2026\" (W06.1), and \"11 Oct 2026\" (W10). Numbers match: \"33 Dubai Government entities\" and \"more than 300 public-facing use cases\" (W08.2). Names and titles match: \"Henna Virkkunen… Executive Vice-President for Tech Sovereignty, Security and Democracy\" (W01.1), \"Yousuf Hamad Al Shaibani\" (W08.3) and \"CELEX 52026PC0780\" (W03.2). DC09 found no non-standard dates. \"5–11 October 2026\" appears only inside W04's verbatim title.",
+    "why_it_matters": "The ICO closing date and the Dubai figures are copied exactly, so readers can act on them without re-checking.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R06",
+    "verdict": "PASS",
+    "evidence": "All three lead items describe events inside 05–11 Oct 2026. Item 1: \"A Commission press release dated 09 Oct 2026 reports a special meeting\" [W01, W02.1]. Item 2: \"opened a call for evidence on 08 Oct 2026\" [W06.1]. Item 3: Dubai accelerator launch [W08], published 05 Oct 2026. The Bottom line's 11 Oct 2026 WAM round-up [W10] is also in-week. Out-of-week sources are not used as lead items: W11 (04 Oct), W12 (01 Oct), W07 (13 Oct) and W13 (12 Oct). The 20 Nov 2026 date appears only in Dates ahead.",
+    "why_it_matters": "Readers deciding in under five minutes can trust that every lead item is news from this reporting week and not recycled material.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R07",
+    "verdict": "FAIL",
+    "evidence": "Two failing instances. (1) Item 2 Why: \"only if UK law applies to us (Inference) (Assumption P3)\". On the context card, P3 means \"Pilot agentic workflows… no production write access yet\". The label sits on a UK-law premise that has no Pn. Under C4 that premise belongs under For human decision only. (2) For human decision, entry 3: \"Legal: Does UK data protection law apply to our processing, which would make the ICO agentic AI call for evidence relevant?\" The clause \"which would make… relevant\" is analysis without (Inference), which C13 requires. Other labels match the card: P2 and P3 in the Bottom line, P2 and P4 in Item 1, and the P4 table row (quoted verbatim from the card).",
+    "why_it_matters": "Readers may take P3 to mean UK law applies to us, which no one has confirmed, and may read unlabelled analysis in a Legal question as settled fact.",
+    "required_fix": "Item 2: move the label so it reads \"…how our agent pilots (Assumption P3) are assessed…, but only if UK law applies to us (Inference)\". Human decision 3: add \"(Inference)\" after \"relevant\", or remove that clause.",
+    "judge": "J3"
+  },
+  {
+    "id": "R08",
+    "verdict": "PASS",
+    "evidence": "Item 1: Why cites US providers (P2) and EU market role (P4). Its Action, \"confirm with Legal that we have no EU market exposure · by 30 Oct 2026\", follows from P4. Item 2: Why ties to agent pilots (P3) and depends on unconfirmed UK applicability; \"No action — monitor\" fits Relevance Low. Item 3: Why links the AI Security Policy to agentic AI (P3, implicit); the Action asks Legal whether it applies, by 30 Oct 2026. The Bottom line's \"Two actions are due by 30 Oct 2026\" matches items 1 and 3. No plainly in-week, profile-affecting development is omitted: W05 is UK healthcare; W10.2's agentic framework is undated and government-only; W13 is published 12 Oct with no dates. Weak point: item 3's Why names no Pn.",
+    "why_it_matters": "Each recommended action traces to a stated exposure in our profile, so the committee is not asked to act on items that do not concern us.",
+    "required_fix": "None (optional: tag item 3's Why with \"(Assumption P3)\"-style profile reference so the link to agent pilots is explicit)",
+    "judge": "J2"
+  },
+  {
+    "id": "R09",
+    "verdict": "PASS",
+    "evidence": "DC01: all seven sections are present in the required order. DC02: BODY 446/450, WHOLE 697/850, 3/5 items, no headline over 12 words; the longest is item 1 at 9 words. The header has Issue date, Prepared for and \"Sources used: 8 of 14 (1 excluded by the workflow)\", consistent with DC03 and the card. The Bottom line has 3 bullets. Every item has What happened (1–3 sentences), Why it matters (1–2 sentences), Action (owner · action · date, or monitor) and Confidence. All required tables are present with the correct columns. Excluded reasons are each 15 words or fewer, e.g. W99: 11 words.",
+    "why_it_matters": "The brief stays within the one-page, phone-readable format leadership relies on; BODY sits only 4 words under its limit.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R10",
+    "verdict": "FAIL",
+    "evidence": "One gloss not supported by the pack. The Bottom line says \"a Dubai AI Security Policy check\". W08.3 says only that Al Shaibani \"cites… the AI Security Policy\" and never names the issuer. Item 3 correctly writes \"the AI Security Policy\" [W08]. Otherwise the brief passes R10. There is no legal advice: Item 1 uses \"check with Legal\", and the UK-law question goes to Legal. There are no outcome predictions (\"could reach\" is hedged and labelled Inference). Officials are named as the sources report them (W01.1, W08.3), and DC06 shows no PII. W99 is disclosed with the workflow's reason (DC05).",
+    "why_it_matters": "Calling it a \"Dubai\" policy states a provenance the pack does not give, which may mislead the Legal applicability check the brief assigns.",
+    "required_fix": "In the Bottom line, change \"a Dubai AI Security Policy check\" to \"an AI Security Policy check [W08]\".",
+    "judge": "J3"
+  },
+  {
+    "id": "R11",
+    "verdict": "PASS",
+    "evidence": "Wording is neutral and officials are described by role and action. Item 1 reads \"Henna Virkkunen, the Commission's Executive Vice-President for Tech Sovereignty, Security and Democracy [W01]\". Her view is attributed to her: \"said Europe is 'well equipped' to deal with rogue AI agents [W02]\" (W02.1). \"loss-of-control incidents\" is quoted from W01.2. Item 3 reads \"The Dubai Electronic Security Centre CEO, Yousuf Hamad Al Shaibani, cited…\" (W08.3). DC07 found no banned terms. No emotive framing appears.",
+    "why_it_matters": "Attributing opinions and keeping wording neutral lets the committee weigh what officials said without the brief's own slant.",
+    "required_fix": "None",
+    "judge": "J3"
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "R01",
+    "verdict": "PASS",
+    "evidence": "Every factual sentence carries a valid pack ID (DC03: cited W01, W02, W06, W07, W08, W10; unknown: none). Examples: Bottom line \"closes 20 Nov 2026 [W06]\" and \"announced the Federal Authority for Artificial Intelligence and Data… [W10]\"; item 1 \"[W01]\", \"[W02]\"; item 2 \"[W06]\"; item 3 \"[W08]\"; each Confidence line is cited ([W01], [W06], [W08]). Dates ahead row and Excluded rows carry their Source ID, including \"[W07]\". The For human decision question \"given only a news-agency report [W10]\" is cited. Bottom line bullet 1 and the 'Why it matters' lines are labelled (Inference) and so are exempt. The Assumptions table comes from the context card.",
+    "why_it_matters": "Leadership can trace every claim in this brief back to a pack extract.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R02",
+    "verdict": "FAIL",
+    "evidence": "(1) Item 1: \"Commission Executive Vice-President Henna Virkkunen called Europe \\\"well equipped\\\" to deal with autonomous AI agents [W02]\". W02.1 gives only \"the EU's tech chief\". The title comes from W01.1, so W02 is cited for a fact it does not contain (merged claim). (2) The same sentence attaches the quote to \"autonomous AI agents\". W02.1 says \"rogue AI agents\", so the attributed remark is changed. (3) Excluded row: \"ten developers committed to improvements\". W04.3 says \"had made or committed to\", which misstates the excluded claim.",
+    "why_it_matters": "The only sourced ministerial statement in the EU item puts words and a title on a source that does not contain them.",
+    "required_fix": "Item 1: cite the title to W01, e.g. \"…Executive Vice-President Henna Virkkunen [W01] called Europe \\\"well equipped\\\" to deal with \\\"rogue AI agents\\\" [W02]\". Keep \"rogue\" as an attributed quote. Excluded row: change to \"ten developers made or committed to improvements\".",
+    "judge": "J1"
+  },
+  {
+    "id": "R03",
+    "verdict": "PASS",
+    "evidence": "No claim rests on a Low source alone. W04 and W09 are never cited as evidence. Confidence levels fit the grades: item 1 \"Medium\" (W01 High plus W02 Medium); item 2 \"High — regulator's own page\" (W06, a single High source, not a two-source combination); item 3 \"Medium — single Medium-grade source\" (W08). Low sources are listed under Excluded with true reasons: W04 \"W07 dated 13 Oct 2026 and gives no number\" (W07.4); \"W03 shows no adoption date\" (W03 capture note); \"single source, no corroboration\" (W04.4); W09 \"repeats W08; analysis is outlet's own\" (W09.1–W09.2).",
+    "why_it_matters": "Weak newsletter and aggregator claims are kept out of what leadership acts on.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R04",
+    "verdict": "PASS",
+    "evidence": "The one material disagreement is handled. W04.3 (\"ICO… 8 Oct 2026… ten developers\") conflicts with W07 (dated 13 Oct 2026; W07.4 gives no number). The brief excludes the claim with the reason \"W07 dated 13 Oct 2026 and gives no number [W07]\". The standardisation date gap (W04.1 \"6 Oct 2026\" vs W03 \"Not shown in capture\") is also resolved by exclusion with a stated reason. No other pack sources disagree on any point the brief uses: W01 and W02 agree on the panel meeting, and W08 and W09 agree on 33 entities and 300 use cases.",
+    "why_it_matters": "Readers are not left with an unexplained mismatch about ICO findings or the standardisation proposal's timing.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R05",
+    "verdict": "PASS",
+    "evidence": "Dates match the sources: \"09 Oct 2026\" (W01), \"08 Oct 2026, closing 20 Nov 2026\" (W06.1), \"05 Oct 2026\" (W08), \"12 Oct 2026\" (W13), \"13 Oct 2026\" (W07). Numbers match: \"33 Dubai Government entities\" and \"more than 300 public-facing use cases\" (W08.2). Names match: \"Henna Virkkunen\" (W01.1), \"Agentic AI for Government Services Accelerator\" (W08.1), \"Federal Authority for Artificial Intelligence and Data\" (W10.3). DC09 found no non-standard dates. \"Not shown in capture\" for W03 faithfully reflects the source. The shortened title \"Executive Vice-President\" is accurate as far as it goes; its sourcing is dealt with under R02.",
+    "why_it_matters": "Deadlines such as the 20 Nov 2026 ICO closing date can be relied on as stated.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R06",
+    "verdict": "PASS",
+    "evidence": "All three lead items fall inside 05–11 Oct 2026. Item 1: \"reported on 09 Oct 2026 a special meeting\" [W01.1], and Virkkunen's remarks were on 09 Oct 2026 [W02.1]. Item 2: \"opened a call for evidence … on 08 Oct 2026\" [W06.1]. Item 3: \"Gulf News reported on 05 Oct 2026\" [W08]. Undated or older material is labelled: \"Background: a WAM report says the UAE announced the Federal Authority…\" [W10.3]. Out-of-week items are kept out of the lead items: W13 (12 Oct) and W07 (13 Oct) appear only under Excluded or as supporting citations. W11 (04 Oct) and W12 (01 Oct) are not presented as lead items.",
+    "why_it_matters": "Readers get only this week's events as headline news, and the undated UAE authority report is clearly marked as background.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R07",
+    "verdict": "PASS",
+    "evidence": "Item 1: \"Whether the AI Act reaches us depends on EU market presence (Assumption P4) (Inference)\". This matches the context card's P4 meaning (no EU market placement, unconfirmed). The bare \"(P3)\" in items 1 and 2 (\"Our agent pilots (P3)\") matches P3, the pilot agentic workflows. The Assumptions table row \"P4 | We do not place AI systems or AI-generated content on the EU market\" is verbatim from the card. Analysis is labelled: Bottom line \"No new binding obligation… (Inference)\"; item 2 \"…unconfirmed (Inference)\"; item 3 \"…likely does not bind us unless we supply them (Inference)\". No new P-IDs are invented. UK applicability goes to \"For human decision\" as C4 requires.",
+    "why_it_matters": "Leadership can see that EU and UK applicability rest on unconfirmed premises (P4, UK law), not on established fact.",
+    "required_fix": "None",
+    "judge": "J3"
+  },
+  {
+    "id": "R08",
+    "verdict": "FAIL",
+    "evidence": "Item 1's Action does not follow from its Why. The Why ends \"(Assumption P4) (Inference); check with Legal.\" The Action then says \"No action — monitor.\" The Why calls for a Legal check, but no owner, task or date is assigned. Everything else checks out. Item 2's Why (\"whether UK law applies to us is unconfirmed\") leads properly to \"Head of Data & Analytics · decide whether to respond, once Legal confirms applicability · by 30 Oct 2026\" [W06]. Item 3's Low relevance and monitor action are consistent. The Bottom line (\"No new binding obligation… One date matters… 20 Nov 2026\") matches the items. No in-week pack development that plainly affects P1–P6 is missing: W05 is healthcare-specific, and W11 and W12 fall before the week.",
+    "why_it_matters": "A phone reader sees \"check with Legal\" and then \"No action\", so it is unclear whether anyone must act on EU applicability for the agent pilots.",
+    "required_fix": "In item 1's Why, delete \"; check with Legal\". P4 confirmation is already routed through \"Assumptions to confirm\" (Head of IT Risk, with Legal), so \"No action — monitor\" then follows from the Why.",
+    "judge": "J2"
+  },
+  {
+    "id": "R09",
+    "verdict": "PASS",
+    "evidence": "DC01: all seven sections are present in the required order. DC02: BODY 368/450, WHOLE 631/850, items 3/5, no headline over 12 words; the longest is item 1 at 9 words. DC08: all items complete. Each item has a headline with Jurisdiction and Relevance, plus What happened, Why it matters to us, Action and Confidence. The header has the issue date, the Prepared for line and \"Sources used: 6 of 13 (0 excluded by the workflow)\", which matches the six cited IDs in DC03. The Bottom line has 3 bullets. Every Excluded reason is 15 words or fewer. Both \"For human decision\" entries are single questions under 30 words, each addressed to \"Legal\". The Dates ahead, Excluded, Assumptions and Sources tables use the required columns.",
+    "why_it_matters": "The brief stays within the one-page, five-minute format the IT leadership readers depend on.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R10",
+    "verdict": "PASS",
+    "evidence": "The brief gives no legal advice. Applicability is routed to Legal: item 1 \"check with Legal\", item 2 Action \"once Legal confirms applicability\", and both \"For human decision\" entries go to Legal. It makes no court or regulator outcome predictions. The only person named is Henna Virkkunen, a public official as reported in W01.1 and W02.1. DC06 found no personal data. No facts come from outside the pack. The glosses \"two frameworks\" (W08.3), \"before final guidance is published\" (W06.2) and \"news-agency report\" (W10, attributed to WAM) are all supported. \"a public request for views\" is a permitted definition of a term. DC05 shows no workflow-excluded sources, so there was nothing to disclose. No source contained instructions that the brief followed.",
+    "why_it_matters": "The brief stays closed-book and routes every applicability question to Legal instead of deciding it.",
+    "required_fix": "None",
+    "judge": "J3"
+  },
+  {
+    "id": "R11",
+    "verdict": "PASS",
+    "evidence": "The opinion is attributed: \"A Medium-grade report says Commission Executive Vice-President Henna Virkkunen called Europe 'well equipped'\" [W02]. Loaded source wording is not repeated: W02's \"rogue AI agents\" and headline \"AI Giants\" (W12) are absent. \"loss-of-control incidents\" appears only as a direct quote from W01.2. Officials are described by role and action: \"The Dubai Electronic Security Centre CEO cited two frameworks\" [W08]; \"Gulf News reported\" [W08]; \"a WAM report says\" [W10]. DC07 found no banned terms.",
+    "why_it_matters": "Neutral, attributed wording lets readers weigh claims about EU officials and Dubai programmes without editorial framing.",
+    "required_fix": "None",
+    "judge": "J3"
+  }
+]

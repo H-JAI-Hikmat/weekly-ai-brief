@@ -1,0 +1,90 @@
+[
+  {
+    "id": "R01",
+    "verdict": "PASS",
+    "evidence": "Every factual sentence carries an existing ID (DC03: 8 cited IDs, none unknown). Examples: \"opened a call for evidence on 08 Oct 2026, closing 20 Nov 2026 [W06]\"; \"brings together 33 Dubai Government entities … [W08]\"; \"which the report gives without a date or powers [W10]\". Uncited sentences are labelled (Inference) or (Assumption Pn). Uncited Confidence reasons, such as \"High for the press release (primary source); no outcome is known\", assess evidence quality and reflect W01.3. Table rows identify their source in the Source/ID column.",
+    "why_it_matters": "Readers deciding on a phone can trace each claim in this brief to a pack extract.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R02",
+    "verdict": "FAIL",
+    "evidence": "Bottom line: \"Two actions are due by 30 Oct 2026: an EU exposure check and an AI Security Policy check [W08].\" W08 (Gulf News, Dubai accelerator) says nothing about EU exposure or any 30 Oct 2026 date. Only the policy name appears in W08.3. The sentence restates the brief's own Actions and cites a source that does not contain them. Minor overstatement in Item 3: \"The accelerator brings together 33 Dubai Government entities\". W08.2 limits this to \"The first phase\".",
+    "why_it_matters": "Citing W08 for an EU-exposure action makes a Dubai news report look like the basis for an EU compliance deadline, which misleads readers about where the obligation comes from.",
+    "required_fix": "Remove [W08] from Bottom line bullet 3 and label it as referring to the actions in Items 1 and 3 (e.g. \"(see Actions, Items 1 and 3)\"). In Item 3, write \"The first phase brings together 33 Dubai Government entities … [W08]\".",
+    "judge": "J1"
+  },
+  {
+    "id": "R03",
+    "verdict": "PASS",
+    "evidence": "Low-grade W04 and W09 support no claim on their own. W04 appears only in Excluded and in a For human decision question that notes \"only Low-grade W04 gives one [W03][W04]\". Excluded rows give true reasons: \"W07 gives no number [W07]\" (W07.4); \"W03 shows no date\" (W03 capture note); \"no other pack source\" for Norway (W04.4); W09 \"repeats facts in W08, not relied on\" (W09.1 matches W08.2). Item 1 Confidence is High, but it is scoped to the High-grade W01 press release. The W02 quote is attributed separately. No High rating rests on Low or paired sources.",
+    "why_it_matters": "Nothing in this brief rests on the third-party newsletter or the aggregator alone.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R04",
+    "verdict": "FAIL",
+    "evidence": "W04.3 dates the ICO foundation-model findings 08 Oct 2026, which is inside the week. W07, the High-grade ICO page with that content, is dated 13 Oct 2026, which is outside the week. W07.4 also says the page does not mention the agentic call for evidence, which W04.3 links to the findings. The brief's Excluded row (\"ICO: ten developers made or committed to improvements | Low grade; W07 gives no number\") resolves only the number. It does not address the date disagreement, which decides whether the ICO developer message is in scope. The W03/W04 standardisation date conflict is properly escalated.",
+    "why_it_matters": "The ICO message to model developers bears on our US-vendor APIs (P2), so readers need to know why it was left out of this week's items.",
+    "required_fix": "Extend the W04 Excluded row or add one: \"W04 dates ICO findings 08 Oct; relied on High-grade W07 dated 13 Oct (outside week)\". Keep the reason to 15 words or fewer.",
+    "judge": "J1"
+  },
+  {
+    "id": "R05",
+    "verdict": "PASS",
+    "evidence": "All dates use DD Mon YYYY (DC09: none non-standard): \"09 Oct 2026\" (W01), \"08 Oct 2026 … 20 Nov 2026\" (W06.1), \"11 Oct 2026\" (W10), \"06 Oct 2026\" (W04.1). Names and titles match the sources: \"Henna Virkkunen … Executive Vice-President for Tech Sovereignty, Security and Democracy\" (W01.1); \"Yousuf Hamad Al Shaibani\", \"Information Security Regulation in Dubai\", \"AI Security Policy\" (W08.3); \"Federal Authority for Artificial Intelligence and Data\" (W10.3); \"CELEX 52026PC0780\" (W03.2). Numbers match: \"33\", \"more than 300\" (W08.2). The W10 publisher is shown as \"Gulf Today (WAM)\", which adds the attributed agency from W10 and does not misstate it.",
+    "why_it_matters": "Exact dates and names let the committee check this brief against primary texts without errors spreading.",
+    "required_fix": "None",
+    "judge": "J1"
+  },
+  {
+    "id": "R06",
+    "verdict": "FAIL",
+    "evidence": "All three lead items are in-week: Item 1 is the 09 Oct 2026 panel meeting [W01, W02]; Item 2 is the call for evidence opened 08 Oct 2026 [W06]; Item 3 is the 05 Oct 2026 accelerator launch [W08]. Failing instance: Bottom line bullet 1 says the 11 Oct 2026 WAM round-up 'mentions a Federal Authority for Artificial Intelligence and Data, with no date or powers given [W10]'. W10.3 gives no event date. The context card's Week 40 watchlist (28 Sep – 04 Oct 2026) already listed this authority. So the announcement is older material, and it appears in the Bottom line without the 'Background:' label.",
+    "why_it_matters": "A reader scanning the Bottom line on a phone could take the Federal Authority announcement as this week's UAE development, when the context card shows it was already tracked in Week 40.",
+    "required_fix": "Start the Federal Authority sentence in Bottom line bullet 1 with 'Background:', or move it out of the Bottom line and keep only the For human decision question.",
+    "judge": "J2"
+  },
+  {
+    "id": "R07",
+    "verdict": "PASS",
+    "evidence": "Every Pn tag matches the context card. Bottom line: \"Our agent pilots and US-vendor APIs… (Inference) (Assumption P3) (Assumption P2)\" (P3 = agentic pilots, P2 = US provider APIs). Item 1: \"could reach our US model providers (Inference) (Assumption P2)\" and \"depend on our EU market role (Inference) (Assumption P4)\" (P4 = no EU market placement). Item 2: \"our agent pilots (Assumption P3)\". The Assumptions table row for P4 quotes the card wording verbatim. No new IDs are invented. The open UK-law premise is labelled (Inference) and routed to \"For human decision\". The Bottom line's mis-cited action line (\"Two actions are due by 30 Oct 2026… [W08]\") is a citation problem under R01/R02, not a labelling one.",
+    "why_it_matters": "Readers can tell which statements about our P2–P4 profile are unconfirmed premises and which are sourced facts.",
+    "required_fix": "None",
+    "judge": "J3"
+  },
+  {
+    "id": "R08",
+    "verdict": "PASS",
+    "evidence": "Item 1: Why cites US providers (P2) and EU market role (P4); Action 'Head of IT Risk · confirm with Legal that we have no EU market exposure · by 30 Oct 2026' follows from P4. Item 2: Why is tied to the agent pilots (P3) and conditional on UK law; 'No action — monitor' fits Low relevance. Item 3: Why is about 'local security expectations for agentic AI'; Action 'ask Legal whether the AI Security Policy applies to us · by 30 Oct 2026' follows. Bottom line bullet 3 ('Two actions are due by 30 Oct 2026') matches Items 1 and 3. Pack sources left out are either outside the week (W11 04 Oct, W12 01 Oct, W07 13 Oct, W13 12 Oct), unrelated to P1–P6 (W05), or undated round-up content (W10).",
+    "why_it_matters": "The two owned actions trace directly to profile items P4 and P3, so leadership can act without re-deriving relevance.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R09",
+    "verdict": "PASS",
+    "evidence": "DC01: all seven sections present in the required order. DC02: BODY 425/450, WHOLE 678/850, items 3/5, no headline over 12 words. Headlines are 9, 7 and 9 words. Header 'Sources used: 8 of 14 (1 excluded by the workflow)' matches DC03 (8 distinct IDs), N=14 and k=1 (W99). Bottom line has 3 bullets. Each item has What happened (1–3 sentences), Why (1–2 sentences), Action and Confidence. All Excluded reasons are 15 words or fewer. Table columns match the format.",
+    "why_it_matters": "The brief fits the one-page, under-five-minute phone read the CIO and heads of function need.",
+    "required_fix": "None",
+    "judge": "J2"
+  },
+  {
+    "id": "R10",
+    "verdict": "PASS",
+    "evidence": "Legal questions are deferred, not answered: \"check with Legal\" (Item 1), \"ask Legal whether the AI Security Policy applies to us\" (Item 3), and three Legal questions under For human decision. No outcomes are predicted; \"no outcome is known\" (Item 1). Named people are public officials as the pack reports them: Henna Virkkunen [W01.1], Yousuf Hamad Al Shaibani [W08.3]. DC06 found no PII hits. Facts trace to the pack (W01.1–W01.3, W06.1–W06.2, W08.2–W08.3, W10.3), and DC04 confirms no excluded source is cited. W99 is disclosed with the workflow's reason (\"Quarantined by security screen: contains instructions aimed at AI or workflow\"), confirmed by DC05.",
+    "why_it_matters": "The brief stays closed-book and discloses the quarantined W99, so leadership is not exposed to unvetted or injected content.",
+    "required_fix": "None",
+    "judge": "J3"
+  },
+  {
+    "id": "R11",
+    "verdict": "FAIL",
+    "evidence": "Item 1: \"said Europe is \\\"well equipped\\\" to deal with rogue AI agents [W02]\". The term \"rogue\" sits outside the quotation marks, so the brief uses it in its own narrative voice and implicitly attributes it to Virkkunen. In W02.1 the phrase \"rogue AI agents\" is Cryptopolitan's paraphrase, not a verbatim quote. The primary source W01.2 uses the neutral \"loss-of-control incidents\". DC07 checks only a banned-term list and does not cover this.",
+    "why_it_matters": "An emotive label from a Medium-grade trade outlet appears as the brief's own wording and as an official's words, which colours how leadership reads EU agent-safety risk.",
+    "required_fix": "Replace \"rogue AI agents\" with neutral wording (e.g. \"said Europe is \\\"well equipped\\\" to deal with AI agents that escape control [W02]\"), or attribute the term in quotes to the outlet: 'what Cryptopolitan calls \"rogue AI agents\" [W02]'.",
+    "judge": "J3"
+  }
+]
